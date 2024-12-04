@@ -1,0 +1,26 @@
+---
+version: 2
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+    groups:
+      github-actions:
+        update-types:
+          - minor
+          - patch
+  - package-ecosystem: docker
+    directory: .devcontainer
+    schedule:
+      interval: daily
+  - package-ecosystem: gitsubmodule
+    directory: /
+    schedule:
+      interval: daily
+    commit-message:
+      prefix: "feat(deps)"
+    groups:
+      git-submodules:
+        patterns: ["amp-*"]

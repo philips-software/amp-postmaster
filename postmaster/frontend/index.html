@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Postmaster (STM32 Firmware Uploader)</title>
+        <link rel="stylesheet" type="text/css" media="all" href="style.css" />
+    </head>
+
+    <body>
+        <nav id="menu">
+            <ul class="topnav">
+                <li><a class="active" href="#">Upload</a></li>
+                <li><a href="#">Discovery</a></li>
+                <li><a href="#">Settings</a></li>
+                <li class="right"><a href="#">About</a></li>
+            </ul>
+        </nav>
+
+        <div id="content">
+            <div id="upload">
+                <form id="upload_form" method="POST" enctype="multipart/form-data">
+                    <fieldset>
+                        <legend>Firmware Upload</legend>
+
+                        <div>
+                            <label for="fileselect">Files to upload:</label>
+                            <input type="file" id="fileselect" name="fileselect[]" multiple="multiple" />
+                            <div id="filedrag">or drop files here</div>
+                        </div>
+
+                        <input type="radio" id="radio_target" name="target" checked="checked">
+                        <label for="radio_target">Connected Target</label>
+                        <input type="radio" id="radio_postmaster" name="target">
+                        <label for="radio_postmaster">Postmaster</label>
+                    </fieldset>
+                </form>
+
+                <div id="progress"></div>
+
+                <div id="messages">
+                    <p>Status Messages</p>
+                </div>
+            </div>
+
+            <div id="discovery">
+                <h1>Postmasters</h1>
+
+                <table id="postmasters">
+                    <caption>Discovered Postmasters</caption>
+                    <thead>
+                        <tr>
+                            <th>Hostname</th>
+                            <th>Version</th>
+                            <th>Attributes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="settings">
+                <h1>Settings</h1>
+                <label for="hostname">Hostname:</label>
+                <input type="text" id="hostname" name="hostname" />
+                <label for="attributes">Attributes:</label>
+                <input type="text" id="attributes" name="attributes" />
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" />
+            </div>
+
+            <div id="about">
+                <h1>Postmaster version ${version}</h1>
+            </div>
+        </div>
+
+        <script src="//code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+        <script src="upload.js"></script>
+    </body>
+</html>

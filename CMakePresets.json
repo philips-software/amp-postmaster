@@ -1,0 +1,125 @@
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "defaults",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "installDir": "${sourceDir}/install"
+    },
+    {
+      "name": "host",
+      "description": "Build Postmaster for host",
+      "inherits": "defaults",
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo",
+        "EMIL_BUILD_TESTS": true
+      }
+    },
+    {
+      "name": "stm32",
+      "hidden": true,
+      "inherits": "defaults",
+      "generator": "Ninja Multi-Config",
+      "environment": {
+        "CMAKE_TOOLCHAIN_FILE": ""
+      },
+      "cacheVariables": {
+        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo;MinSizeRel",
+        "TARGET_MCU_VENDOR": "st"
+      }
+    },
+    {
+      "name": "stm32f407",
+      "description": "Build Postmaster for stm32f407",
+      "toolchainFile": "${sourceDir}/amp-embedded-infra-lib/cmake/toolchain-arm-gcc-m4-fpv4-sp-d16.cmake",
+      "inherits": "stm32",
+      "cacheVariables": {
+        "TARGET_CORTEX": "m4",
+        "TARGET_MCU": "stm32f407",
+        "TARGET_MCU_FAMILY": "stm32f4xx"
+      }
+    },
+    {
+      "name": "windows",
+      "description": "Build Postmaster for Windows",
+      "inherits": "defaults",
+      "toolchainFile": "${sourceDir}/amp-embedded-infra-lib/cmake/toolchain-clang-x86_64-pc-windows-msvc.cmake",
+      "generator": "Ninja Multi-Config",
+      "environment": {
+        "CCACHE_DEPEND": "true",
+        "CCACHE_COMPILERTYPE": "clang-cl"
+      },
+      "cacheVariables": {
+        "CMAKE_COMPILE_WARNING_AS_ERROR": "Off",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo"
+      }
+    },
+    {
+      "name": "flex",
+      "inherits": "defaults",
+      "generator": "Ninja",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "host-Debug",
+      "configuration": "Debug",
+      "configurePreset": "host"
+    },
+    {
+      "name": "host-RelWithDebInfo",
+      "configuration": "RelWithDebInfo",
+      "configurePreset": "host"
+    },
+    {
+      "name": "stm32f407-RelWithDebInfo",
+      "configuration": "RelWithDebInfo",
+      "configurePreset": "stm32f407"
+    },
+    {
+      "name": "stm32f407-MinSizeRel",
+      "configuration": "MinSizeRel",
+      "configurePreset": "stm32f407"
+    },
+    {
+      "name": "windows-Debug",
+      "configuration": "Debug",
+      "configurePreset": "windows"
+    },
+    {
+      "name": "windows-RelWithDebInfo",
+      "configuration": "RelWithDebInfo",
+      "configurePreset": "windows"
+    },
+    {
+      "name": "flex",
+      "configuration": "MinSizeRel",
+      "configurePreset": "flex",
+      "targets": ["postmaster.flex"]
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "defaults",
+      "hidden": true,
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "host-Debug",
+      "configurePreset": "host",
+      "configuration": "Debug",
+      "inherits": "defaults"
+    }
+  ]
+}

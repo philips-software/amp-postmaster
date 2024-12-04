@@ -1,0 +1,9 @@
+[submodule "EmbeddedInfraLib"]
+	path = amp-embedded-infra-lib
+	url = https://github.com/philips-software/amp-embedded-infra-lib.git
+[submodule "HalSt"]
+	path = amp-hal-st
+	url = https://github.com/philips-software/amp-hal-st.git
+[submodule "Preview"]
+	path = amp-preview
+	url = https://github.com/philips-software/amp-preview.git

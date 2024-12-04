@@ -1,0 +1,8 @@
+---
+self-hosted-runner:
+  labels:
+    - linux
+    - philips-code-hub
+    - self-hosted
+    - ubuntu-latest
+    - x64
