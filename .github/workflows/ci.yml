@@ -39,7 +39,6 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-          token: ${{ secrets.AMP_ACCESS_TOKEN }}
       - uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9 # v1.2.14
         with:
           key: ${{ matrix.target}}-${{ matrix.configuration }}
