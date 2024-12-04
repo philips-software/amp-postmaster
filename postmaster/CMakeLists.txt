@@ -1,0 +1,12 @@
+add_version_header_target(postmaster.version)
+
+add_subdirectory(bootloader)
+add_subdirectory(discovery)
+add_subdirectory(frontend)
+add_subdirectory(flex)
+add_subdirectory(instantiations_st)
+add_subdirectory(instantiations)
+add_subdirectory(postmaster_stm32f407)
+add_subdirectory(programmer)
+add_subdirectory(prototype_win)
+add_subdirectory(upgrade_pack_builder)

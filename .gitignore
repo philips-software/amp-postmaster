@@ -1,0 +1,7 @@
+.cache/
+.vs/
+.vscode/.cortex-debug*
+.xwin-cache/
+build/
+install/
+out/

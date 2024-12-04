@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "EchoAttributes.proto";
+
+package postmaster_configuration;
+
+message Configuration
+{
+    string hostname = 1 [(string_size) = 64];
+    string attributes = 2 [(string_size) = 64];
+    string password = 3 [(string_size) = 64];
+}
