@@ -13,6 +13,15 @@
 #include "services/tracer/TracerOnIoOutputInfrastructure.hpp"
 #include <cstdlib>
 
+std::string Env(const char* name)
+{
+    auto result = std::getenv(name);
+    if (result != nullptr)
+        return result;
+    else
+        return "";
+}
+
 int main(int argc, const char* argv[], const char* env[])
 {
     args::ArgumentParser parser("Firmware Lifecycle and ECHO eXchange");
@@ -25,7 +34,7 @@ int main(int argc, const char* argv[], const char* env[])
 
     try
     {
-        std::string firmwareArg = std::getenv("POSTMASTER_FIRMWARE");
+        std::string firmwareArg = Env("POSTMASTER_FIRMWARE");
         std::string urlArg = std::getenv("POSTMASTER_IP");
         std::string passwordArg = std::getenv("POSTMASTER_PASSWORD");
 
