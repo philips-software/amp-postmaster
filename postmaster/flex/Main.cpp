@@ -35,8 +35,8 @@ int main(int argc, const char* argv[], const char* env[])
     try
     {
         std::string firmwareArg = Env("POSTMASTER_FIRMWARE");
-        std::string urlArg = std::getenv("POSTMASTER_IP");
-        std::string passwordArg = std::getenv("POSTMASTER_PASSWORD");
+        std::string urlArg = Env("POSTMASTER_IP");
+        std::string passwordArg = Env("POSTMASTER_PASSWORD");
 
         if (firmwareArg.empty() && urlArg.empty())
         {
