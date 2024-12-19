@@ -10,7 +10,7 @@ COPY . /workspace
 RUN cmake --preset flex \
  && cmake --build --preset flex
 
-RUN apt-get update && apt-get install net-tools
+RUN apt-get update && apt-get install -y --no-install-recommends net-tools
 
 FROM scratch
 
