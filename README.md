@@ -8,7 +8,7 @@
 
 Postmaster is a device that clicks on top of an STM32 Nucleo-F767ZI board from ST Microelectronics, and through its Ethernet connector you can program the Nucleo and communicate with it.
 
-In this way, Postmaster is usable in hardware-in-the-loop tests, where a test board is reachable through the internet. That test board can first be programmed with the correct firmware. For communicating with the test board, a client can connect to Postmaster via a websocket connection, and talk to the attached board either via a plain UART connection, or via an [ECHO](https://philips-software.github.io/amp-embedded-infra-lib/embedded_infrastructure_library/6.0.0/Echo.html) connection. This communication line is used to execute tests.
+In this way, Postmaster is usable in hardware-in-the-loop tests, where a test board is reachable through the internet. That test board can first be programmed with the correct firmware. For communicating with the test board, a client can connect to Postmaster via a websocket connection, and talk to the attached board either via a plain UART connection, or via an [ECHO](https://philips-software.github.io/amp-embedded-infra-lib/embedded_infrastructure_library/7.0.0/Echo.html) connection. This communication line is used to execute tests.
 
 Test boards enabled by Postmaster are intended to be inherently scalable; Adding tests boards in a setup should be as simple as putting a Postmaster on top of it, configuring the Postmaster with a few labels describing the characteristics of that board, and connecting it to the internet. A locally installed proxy (also part of this archive) provides discoverability of all Postmasters in its vicinity, and routes incoming requests for boards with certain characteristics to any available board.
 
