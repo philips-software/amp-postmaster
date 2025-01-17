@@ -36,13 +36,13 @@ jobs:
       #   if: ${{ success() || failure() }}
       #   with:
       #     sarif_file: megalinter-reports/megalinter-report.sarif
-      - uses: actions/upload-artifact@6f51ac03b9356f520e9adb1b1b7802705f340c2b
+      - uses: actions/upload-artifact@65c4c4a1ddee5b72f698fdd19549f0f0fb45cf08
         if: ${{ success() || failure() }}
         with:
           name: linter
           path: |
             megalinter-reports
-      - uses: reviewdog/action-suggester@db4abb16fbaabe386831e5addb7be1485d0d63d3
+      - uses: reviewdog/action-suggester@a3026c6020837c23b61a79d12db223a00df19e6a
         with:
           tool_name: MegaLinter
           filter_mode: diff_context
