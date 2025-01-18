@@ -42,7 +42,7 @@ namespace main_
         application::Authentication authentication;
         infra::Creator<services::Stoppable, main_::NetworkConnected, void(services::LightweightIp& lightweightIp)> networkCreator;
 
-        main_::Ethernet<3, 0, 4> ethernet;
+        main_::Ethernet<4, 0, 9> ethernet;
     };
 }
 

@@ -148,9 +148,10 @@ int main()
     static GpioPinStub resetTarget;
     static GpioPinStub boot0;
     static application::Authentication authentication{ passwordAccess, randomDataGenerator };
-    static main_::HttpServerSingleConnection httpServer{ networkAdapter.ConnectionFactory(), hostnameAccess, attributesAccess, passwordAccess, authentication, mdnsDiscovery.discovery, serialCreator, serialCreator, flash, reset, [](bool open, services::IPAddress address) {}, [](bool receiving) {}, [](bool receiving) {}, resetTarget, boot0 };
+    static main_::HttpServer::WithConnections<5> httpServer{ networkAdapter.ConnectionFactory(), 80, hostnameAccess, attributesAccess, passwordAccess, authentication, mdnsDiscovery.discovery, [](bool open, services::IPAddress address) {}, [](bool receiving) {}, [](bool receiving) {} };
+    static main_::HttpServerSingleConnection httpServerSingleConnection{ networkAdapter.ConnectionFactory(), 8080, hostnameAccess, attributesAccess, passwordAccess, authentication, mdnsDiscovery.discovery, serialCreator, serialCreator, flash, reset, [](bool open, services::IPAddress address) {}, [](bool receiving) {}, [](bool receiving) {}, resetTarget, boot0 };
     static main_::EchoServer echoServer{ networkAdapter.ConnectionFactory(), serialCreator, 1235 };
-    static main_::SingleConnectionLink link(httpServer.server, echoServer.listener);
+    static main_::SingleConnectionLink link(httpServerSingleConnection.server, echoServer.listener);
 
     networkAdapter.Run();
 }

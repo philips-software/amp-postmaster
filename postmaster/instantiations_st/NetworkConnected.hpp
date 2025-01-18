@@ -21,7 +21,7 @@ namespace main_
             hal::Flash& upgradePack, UartCreator& uartProgrammerCreator, UartCreator& uartExternalCreator, hal::Reset& reset, application::ViewStatus& viewStatus)
             : mdns{ *hostname, lightweightIp, lightweightIp, lightweightIp.GetIPv4Address(), Postmaster::generated::VERSION, Postmaster::generated::VERSION_FULL, *attributes }
             , mdnsDiscovery{ lightweightIp, lightweightIp }
-            , httpServer{ lightweightIp, hostname, attributes, password, authentication, mdnsDiscovery.discovery, uartProgrammerCreator, uartExternalCreator, upgradePack, reset, [&viewStatus](bool open, services::IPAddress address)
+            , httpServerSingleConnection{ lightweightIp, hostname, attributes, password, authentication, mdnsDiscovery.discovery, uartProgrammerCreator, uartExternalCreator, upgradePack, reset, [&viewStatus](bool open, services::IPAddress address)
                 {
                     viewStatus.SetConnectionOpen(open, address);
                 },
@@ -39,15 +39,21 @@ namespace main_
 
         void Stop(const infra::Function<void()>& onDone) override
         {
-            httpServer.Stop(onDone);
+            this->onDone = onDone;
+            httpServerSingleConnection.Stop([this]()
+                {
+                    httpServer.Stop(this->onDone);
+                });
         }
 
         main_::Mdns mdns;
         main_::MdnsDiscovery mdnsDiscovery;
-        main_::HttpServerSt httpServer;
+        main_::HttpServer::WithConnections<5> httpServer;
+        main_::HttpServerSt httpServerSingleConnection;
         main_::EchoServer echoServer;
-        main_::SingleConnectionLink link{ httpServer.server, echoServer.listener };
+        main_::SingleConnectionLink link{ httpServerSingleConnection.server, echoServer.listener };
         main_::TraceForwarderSt traceForwarder;
+        infra::Function<void()> onDone;
     };
 }
 
