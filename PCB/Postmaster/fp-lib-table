@@ -1,0 +1,4 @@
+(fp_lib_table
+  (version 7)
+  (lib (name "PostmasterParts")(type "KiCad")(uri "${KIPRJMOD}/PostmasterParts.pretty")(options "")(descr ""))
+)
