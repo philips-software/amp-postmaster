@@ -21,7 +21,7 @@ namespace main_
         return echoConnection;
     }
 
-    SingleConnectionLink::SingleConnectionLink(services::SingleConnectionListener& listener1, services::SingleConnectionListener& listener2)
+    SingleConnectionLink::SingleConnectionLink(application::ReportingHttpServer& listener1, services::SingleConnectionListener& listener2)
         : listener1(listener1)
         , listener2(listener2)
     {
@@ -29,16 +29,16 @@ namespace main_
         listener2.SetNewConnectionStrategy(*this);
     }
 
-    void SingleConnectionLink::StopCurrentConnection(services::SingleConnectionListener& listener)
+    void SingleConnectionLink::StopCurrentConnection(void* listener)
     {
-        if (&listener == &listener1)
+        if (listener == &listener1)
             listener1RequestedNewConnection = true;
-        if (&listener == &listener2)
+        if (listener == &listener2)
             listener2RequestedNewConnection = true;
 
         numStopped = 0;
-        listener1.StopCurrentConnection(listener1);
-        listener2.StopCurrentConnection(listener2);
+        listener1.StopCurrentConnection(&listener1);
+        listener2.StopCurrentConnection(&listener2);
     }
 
     void SingleConnectionLink::StartNewConnection()
@@ -53,7 +53,7 @@ namespace main_
                 listener1.StartNewConnection();
 
                 if (listener2RequestedNewConnection)
-                    StopCurrentConnection(listener1);
+                    StopCurrentConnection(&listener1);
             }
             else if (listener2RequestedNewConnection)
             {

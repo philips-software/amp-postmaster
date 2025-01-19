@@ -1,3 +1,4 @@
+#include "postmaster/frontend/ReportingHttpServer.hpp"
 #include "postmaster/instantiations/UartCreator.hpp"
 #include "protobuf/echo/ServiceForwarder.hpp"
 #include "services/network/Connection.hpp"
@@ -42,15 +43,15 @@ namespace main_
         : private services::NewConnectionStrategy
     {
     public:
-        SingleConnectionLink(services::SingleConnectionListener& listener1, services::SingleConnectionListener& listener2);
+        SingleConnectionLink(application::ReportingHttpServer& listener1, services::SingleConnectionListener& listener2);
 
     private:
-        void StopCurrentConnection(services::SingleConnectionListener& listener) override;
+        void StopCurrentConnection(void* listener) override;
         void StartNewConnection() override;
 
     private:
         uint32_t numStopped = 0;
-        services::SingleConnectionListener& listener1;
+        application::ReportingHttpServer& listener1;
         services::SingleConnectionListener& listener2;
 
         bool listener1RequestedNewConnection = false;
