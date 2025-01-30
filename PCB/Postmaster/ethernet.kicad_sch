@@ -4605,6 +4605,7 @@
 	(hierarchical_label "rxd0"
 		(shape output)
 		(at 255.27 81.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4616,6 +4617,7 @@
 	(hierarchical_label "txd1"
 		(shape input)
 		(at 210.82 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4627,6 +4629,7 @@
 	(hierarchical_label "crs_dv"
 		(shape input)
 		(at 255.27 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4638,6 +4641,7 @@
 	(hierarchical_label "rxd1"
 		(shape output)
 		(at 255.27 83.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4649,6 +4653,7 @@
 	(hierarchical_label "mdio"
 		(shape bidirectional)
 		(at 276.86 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4660,6 +4665,7 @@
 	(hierarchical_label "txen"
 		(shape input)
 		(at 210.82 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4671,6 +4677,7 @@
 	(hierarchical_label "mdc"
 		(shape input)
 		(at 276.86 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4682,6 +4689,7 @@
 	(hierarchical_label "txd0"
 		(shape input)
 		(at 210.82 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4693,6 +4701,7 @@
 	(hierarchical_label "clkin"
 		(shape input)
 		(at 210.82 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
