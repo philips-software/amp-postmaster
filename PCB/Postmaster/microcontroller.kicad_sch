@@ -7143,7 +7143,6 @@
 	)
 	(label "FLASH_CS"
 		(at 20.32 161.29 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7154,7 +7153,6 @@
 	)
 	(label "SWCLK"
 		(at 163.83 74.93 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7165,7 +7163,6 @@
 	)
 	(label "UART3_TX"
 		(at 19.05 118.11 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7176,7 +7173,6 @@
 	)
 	(label "SWDIO"
 		(at 163.83 72.39 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7187,7 +7183,6 @@
 	)
 	(label "UART1_TX"
 		(at 163.83 97.79 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7198,7 +7193,6 @@
 	)
 	(label "SWCLK"
 		(at 19.05 107.95 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7209,7 +7203,6 @@
 	)
 	(label "SWDIO"
 		(at 19.05 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7220,7 +7213,6 @@
 	)
 	(label "TRESET"
 		(at 163.83 92.71 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7231,7 +7223,6 @@
 	)
 	(label "ALT_UART1_TX"
 		(at 163.83 62.23 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7242,7 +7233,6 @@
 	)
 	(label "STLINK_RX"
 		(at 166.37 143.51 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7253,7 +7243,6 @@
 	)
 	(label "SPI3_CLK"
 		(at 166.37 151.13 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7264,7 +7253,6 @@
 	)
 	(label "SPI3_MOSI"
 		(at 20.32 166.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7275,7 +7263,6 @@
 	)
 	(label "SPI3_MOSI"
 		(at 166.37 156.21 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7286,7 +7273,6 @@
 	)
 	(label "ALT_UART1_RX"
 		(at 163.83 100.33 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7297,7 +7283,6 @@
 	)
 	(label "UART1_RX"
 		(at 233.68 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7308,7 +7293,6 @@
 	)
 	(label "ALT_UART1_TX"
 		(at 212.09 68.58 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7319,7 +7303,6 @@
 	)
 	(label "TRESET"
 		(at 209.55 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7330,7 +7313,6 @@
 	)
 	(label "SWO"
 		(at 19.05 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7341,7 +7323,6 @@
 	)
 	(label "SPI3_MISO"
 		(at 166.37 153.67 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7352,7 +7333,6 @@
 	)
 	(label "UART3_RX"
 		(at 99.06 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7363,7 +7343,6 @@
 	)
 	(label "SDA"
 		(at 163.83 105.41 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7374,7 +7353,6 @@
 	)
 	(label "SCK"
 		(at 234.95 33.02 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7385,7 +7363,6 @@
 	)
 	(label "FLASH_CS"
 		(at 163.83 77.47 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7396,7 +7373,6 @@
 	)
 	(label "UART3_TX"
 		(at 99.06 125.73 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7407,7 +7383,6 @@
 	)
 	(label "SDA"
 		(at 234.95 35.56 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7418,7 +7393,6 @@
 	)
 	(label "RESET"
 		(at 46.99 52.07 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7429,7 +7403,6 @@
 	)
 	(label "RESET"
 		(at 19.05 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7440,7 +7413,6 @@
 	)
 	(label "UART3_RX"
 		(at 19.05 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7451,7 +7423,6 @@
 	)
 	(label "SWO"
 		(at 163.83 90.17 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7462,7 +7433,6 @@
 	)
 	(label "STLINK_RX"
 		(at 207.01 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7473,7 +7443,6 @@
 	)
 	(label "RESET"
 		(at 104.14 39.37 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7484,7 +7453,6 @@
 	)
 	(label "UART1_TX"
 		(at 233.68 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7495,7 +7463,6 @@
 	)
 	(label "BOOT0"
 		(at 163.83 95.25 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7506,7 +7473,6 @@
 	)
 	(label "SPI3_CLK"
 		(at 20.32 163.83 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7517,7 +7483,6 @@
 	)
 	(label "UART1_RX"
 		(at 163.83 64.77 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7528,7 +7493,6 @@
 	)
 	(label "ALT_UART1_RX"
 		(at 212.09 71.12 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7539,7 +7503,6 @@
 	)
 	(label "BOOT0"
 		(at 213.36 91.44 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7550,7 +7513,6 @@
 	)
 	(label "SCK"
 		(at 163.83 102.87 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7561,7 +7523,6 @@
 	)
 	(label "SPI3_MISO"
 		(at 20.32 168.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7573,7 +7534,6 @@
 	(hierarchical_label "txd1"
 		(shape output)
 		(at 161.29 115.57 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7585,7 +7545,6 @@
 	(hierarchical_label "clkin"
 		(shape output)
 		(at 184.15 41.91 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7597,7 +7556,6 @@
 	(hierarchical_label "crs_dv"
 		(shape output)
 		(at 161.29 57.15 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7609,7 +7567,6 @@
 	(hierarchical_label "txen"
 		(shape output)
 		(at 161.29 110.49 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7621,7 +7578,6 @@
 	(hierarchical_label "mdio"
 		(shape bidirectional)
 		(at 161.29 44.45 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7633,7 +7589,6 @@
 	(hierarchical_label "txd0"
 		(shape output)
 		(at 161.29 113.03 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7645,7 +7600,6 @@
 	(hierarchical_label "rxd1"
 		(shape input)
 		(at 161.29 138.43 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7657,7 +7611,6 @@
 	(hierarchical_label "rxd0"
 		(shape input)
 		(at 161.29 135.89 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -7669,7 +7622,6 @@
 	(hierarchical_label "mdc"
 		(shape output)
 		(at 161.29 128.27 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)

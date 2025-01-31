@@ -4747,7 +4747,6 @@
 	(hierarchical_label "rxd0"
 		(shape output)
 		(at 255.27 81.28 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4759,7 +4758,6 @@
 	(hierarchical_label "txd1"
 		(shape input)
 		(at 212.09 66.04 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4771,7 +4769,6 @@
 	(hierarchical_label "crs_dv"
 		(shape input)
 		(at 255.27 101.6 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4783,7 +4780,6 @@
 	(hierarchical_label "rxd1"
 		(shape output)
 		(at 255.27 83.82 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4795,7 +4791,6 @@
 	(hierarchical_label "mdio"
 		(shape bidirectional)
 		(at 274.32 109.22 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4807,7 +4802,6 @@
 	(hierarchical_label "txen"
 		(shape input)
 		(at 212.09 73.66 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4819,7 +4813,6 @@
 	(hierarchical_label "mdc"
 		(shape input)
 		(at 274.32 111.76 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4831,7 +4824,6 @@
 	(hierarchical_label "txd0"
 		(shape input)
 		(at 212.09 63.5 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4843,7 +4835,6 @@
 	(hierarchical_label "clkin"
 		(shape input)
 		(at 212.09 121.92 0)
-		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -6433,7 +6424,7 @@
 				)
 			)
 		)
-		(property "Footprint" "J00-0065NL:PULSE_J00-0065NL"
+		(property "Footprint" "PostmasterParts:PULSE_J00-0065NL"
 			(at 49.53 91.44 0)
 			(effects
 				(font
