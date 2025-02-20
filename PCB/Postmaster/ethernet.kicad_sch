@@ -4747,6 +4747,7 @@
 	(hierarchical_label "rxd0"
 		(shape output)
 		(at 255.27 81.28 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4758,6 +4759,7 @@
 	(hierarchical_label "txd1"
 		(shape input)
 		(at 212.09 66.04 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4769,6 +4771,7 @@
 	(hierarchical_label "crs_dv"
 		(shape input)
 		(at 255.27 101.6 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4780,6 +4783,7 @@
 	(hierarchical_label "rxd1"
 		(shape output)
 		(at 255.27 83.82 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4791,6 +4795,7 @@
 	(hierarchical_label "mdio"
 		(shape bidirectional)
 		(at 274.32 109.22 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4802,6 +4807,7 @@
 	(hierarchical_label "txen"
 		(shape input)
 		(at 212.09 73.66 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4813,6 +4819,7 @@
 	(hierarchical_label "mdc"
 		(shape input)
 		(at 274.32 111.76 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4824,6 +4831,7 @@
 	(hierarchical_label "txd0"
 		(shape input)
 		(at 212.09 63.5 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4835,6 +4843,7 @@
 	(hierarchical_label "clkin"
 		(shape input)
 		(at 212.09 121.92 0)
+		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5478,7 +5487,7 @@
 				(hide yes)
 			)
 		)
-		(property "JCLPCBPart" "C1634"
+		(property "JLCPCBPart" "C1634"
 			(at 134.62 107.95 0)
 			(effects
 				(font
@@ -6452,87 +6461,7 @@
 				(hide yes)
 			)
 		)
-		(property "MF" "Pulse Electronics Network"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Description_1" "\n                        \n                            1 Port RJ45Through Hole 10/100 Base-TX, AutoMDIX\n                        \n"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Package" "None"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Price" "None"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Check_prices" "https://www.snapeda.com/parts/J00-0065NL/Pulse/view-part/?ref=eda"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "SnapEDA_Link" "https://www.snapeda.com/parts/J00-0065NL/Pulse/view-part/?ref=snap"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MP" "J00-0065NL"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
 		(property "Availability" "In Stock"
-			(at 49.53 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "Pulse"
 			(at 49.53 91.44 0)
 			(effects
 				(font
@@ -7860,7 +7789,7 @@
 				(hide yes)
 			)
 		)
-		(property "JCLPCBPart" "C1634"
+		(property "JLCPCBPart" "C1634"
 			(at 114.3 107.95 0)
 			(effects
 				(font
@@ -7939,7 +7868,7 @@
 				(hide yes)
 			)
 		)
-		(property "JCLPCBPart" "C1634"
+		(property "JLCPCBPart" "C1634"
 			(at 104.14 107.95 0)
 			(effects
 				(font
@@ -8018,7 +7947,7 @@
 				(hide yes)
 			)
 		)
-		(property "JCLPCBPart" "C1634"
+		(property "JLCPCBPart" "C1634"
 			(at 124.46 107.95 0)
 			(effects
 				(font
