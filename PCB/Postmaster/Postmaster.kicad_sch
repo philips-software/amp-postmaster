@@ -1,0 +1,359 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "b2fb7ca8-b44b-45c2-b25e-cd50f2bbc5c4")
+	(paper "A4")
+	(lib_symbols)
+	(wire
+		(pts
+			(xy 106.68 69.85) (xy 110.49 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b4a4145-2bc5-46ba-8044-c20302145ee5")
+	)
+	(wire
+		(pts
+			(xy 106.68 74.93) (xy 110.49 74.93)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3077ee4b-0cbe-4ba6-b2cf-e5d5f1f4e06e")
+	)
+	(wire
+		(pts
+			(xy 106.68 77.47) (xy 110.49 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "364b0394-cc68-4b48-a4e8-acc3bac45ac6")
+	)
+	(wire
+		(pts
+			(xy 106.68 90.17) (xy 110.49 90.17)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "443d3ae0-d451-4d09-b20b-cdd6a63591f4")
+	)
+	(wire
+		(pts
+			(xy 106.68 80.01) (xy 110.49 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5c951017-0b07-48d9-80f7-e605ce8d16dd")
+	)
+	(wire
+		(pts
+			(xy 106.68 87.63) (xy 110.49 87.63)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6b2f2f8a-9b3d-4157-a5f9-dfc3a32080c9")
+	)
+	(wire
+		(pts
+			(xy 106.68 72.39) (xy 110.49 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5d65b74-821c-4954-b30f-f8c113ed5a46")
+	)
+	(wire
+		(pts
+			(xy 106.68 85.09) (xy 110.49 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b866ce49-84e5-4b52-9348-ff853e56afbb")
+	)
+	(wire
+		(pts
+			(xy 106.68 82.55) (xy 110.49 82.55)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cb780a85-6377-4dd7-8bf5-470e57529cb2")
+	)
+	(sheet
+		(at 110.49 62.23)
+		(size 24.13 36.83)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "6b6c9333-359e-485e-9820-666d3b2f9ba5")
+		(property "Sheetname" "Microcontroller"
+			(at 110.49 61.5184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "microcontroller.kicad_sch"
+			(at 110.49 99.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "txd0" output
+			(at 110.49 87.63 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "1c828b3e-6efd-452c-88ad-e1a0146fc916")
+		)
+		(pin "txen" output
+			(at 110.49 85.09 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "594e345a-5a6f-4527-b228-be58314e83ef")
+		)
+		(pin "txd1" output
+			(at 110.49 90.17 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "eacf8138-c4e6-4899-afb4-6927dcb6322d")
+		)
+		(pin "rxd0" input
+			(at 110.49 74.93 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "e10acd76-a214-4279-8000-8ef892c72fce")
+		)
+		(pin "rxd1" input
+			(at 110.49 77.47 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "266c99e2-4e06-48bd-b791-3a4fa16329c8")
+		)
+		(pin "mdio" bidirectional
+			(at 110.49 72.39 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "897b0e36-e13b-4707-ad8e-bbd43dc5aeb0")
+		)
+		(pin "mdc" output
+			(at 110.49 69.85 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "c0e50ea8-554a-4faf-b888-8621908defb9")
+		)
+		(pin "crs_dv" output
+			(at 110.49 80.01 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "35e6af69-f8b5-4217-aba6-a16fdabf0692")
+		)
+		(pin "clkin" output
+			(at 110.49 82.55 180)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+			(uuid "de2be7d2-cded-463a-93a2-b44be27b8e06")
+		)
+		(instances
+			(project "Postmaster"
+				(path "/b2fb7ca8-b44b-45c2-b25e-cd50f2bbc5c4"
+					(page "3")
+				)
+			)
+		)
+	)
+	(sheet
+		(at 76.2 62.23)
+		(size 30.48 36.83)
+		(fields_autoplaced yes)
+		(stroke
+			(width 0.1524)
+			(type solid)
+		)
+		(fill
+			(color 0 0 0 0.0000)
+		)
+		(uuid "c4600c43-5b92-49d3-8115-df606fc80505")
+		(property "Sheetname" "Ethernet"
+			(at 76.2 61.5184 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left bottom)
+			)
+		)
+		(property "Sheetfile" "ethernet.kicad_sch"
+			(at 76.2 99.6446 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left top)
+			)
+		)
+		(pin "mdc" input
+			(at 106.68 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d28ff1cf-fafc-4de0-9dab-75f6cbb79c23")
+		)
+		(pin "mdio" bidirectional
+			(at 106.68 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "d887c23a-0345-4396-8e24-a32e30b6b6e6")
+		)
+		(pin "rxd0" output
+			(at 106.68 74.93 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "28926d7b-d0f9-4cb8-8457-bdfb6b734924")
+		)
+		(pin "rxd1" output
+			(at 106.68 77.47 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "510bc4df-fd4e-41ce-902c-9161a0a82e94")
+		)
+		(pin "crs_dv" input
+			(at 106.68 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "be07ed7c-7a53-4cb7-a69d-4ea3d6a8bdfd")
+		)
+		(pin "clkin" input
+			(at 106.68 82.55 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "ce31da8b-1ea8-4e61-8e74-bd0c1fffc5a4")
+		)
+		(pin "txen" input
+			(at 106.68 85.09 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "dcf1a1d7-3a81-4434-8a02-e0b1726fe4f1")
+		)
+		(pin "txd0" input
+			(at 106.68 87.63 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "27feafc8-f446-478c-8f5a-a13865556c6c")
+		)
+		(pin "txd1" input
+			(at 106.68 90.17 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+			(uuid "efbc9a5d-323c-483d-8bfa-ccfcd468bcd6")
+		)
+		(instances
+			(project "Postmaster"
+				(path "/b2fb7ca8-b44b-45c2-b25e-cd50f2bbc5c4"
+					(page "2")
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
