@@ -493,7 +493,7 @@
   },
   "schematic": {
     "annotate_start_num": 0,
-    "bom_export_filename": "fab\\Components.csv",
+    "bom_export_filename": "production\\Components.csv",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
       "field_delimiter": ",",
@@ -542,7 +542,7 @@
           "group_by": false,
           "label": "DNP",
           "name": "${DNP}",
-          "show": true
+          "show": false
         },
         {
           "group_by": false,

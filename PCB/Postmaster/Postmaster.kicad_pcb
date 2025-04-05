@@ -1797,7 +1797,7 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C19"
-			(at 5.3975 -0.3175 360)
+			(at 5.3975 -0.3175 0)
 			(layer "F.SilkS")
 			(uuid "70850427-b44f-4dff-9c30-838f7222ff36")
 			(effects
@@ -2023,7 +2023,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R17"
-			(at 5.3975 0.1216 360)
+			(at 5.3975 0.1216 0)
 			(layer "F.SilkS")
 			(uuid "96aa3152-b76d-4011-820a-d4ee3ad140c5")
 			(effects
@@ -6430,7 +6430,7 @@
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "capacitor")
 		(property "Reference" "C18"
-			(at -3.4925 0.3175 360)
+			(at -3.4925 0.3175 0)
 			(layer "F.SilkS")
 			(uuid "db50a353-8dc8-4509-ba2c-eecab35fcf27")
 			(effects
@@ -8811,7 +8811,7 @@
 		(descr "Resistor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R18"
-			(at -3.4925 -0.1216 360)
+			(at -3.4925 -0.1216 0)
 			(layer "F.SilkS")
 			(uuid "b5fe6bb4-9cb7-4b67-bf6f-ea1cde1a5f58")
 			(effects
@@ -10393,7 +10393,7 @@
 		(descr "Through hole straight pin header, 1x04, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x04 2.54mm single row")
 		(property "Reference" "J4"
-			(at 0 -2.33 360)
+			(at 0 -2.33 0)
 			(layer "F.SilkS")
 			(uuid "f39f2f88-bb28-457b-802e-3418d9d87a3a")
 			(effects
@@ -10404,7 +10404,7 @@
 			)
 		)
 		(property "Value" "Conn_01x04"
-			(at 0 9.95 360)
+			(at 0 9.95 0)
 			(layer "F.Fab")
 			(uuid "97fdf21d-540f-40a9-a091-54db9c7d2f27")
 			(effects
