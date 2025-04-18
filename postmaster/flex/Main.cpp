@@ -11,6 +11,16 @@
 #include "services/network_instantiations/NetworkAdapter.hpp"
 #include "services/tracer/GlobalTracer.hpp"
 #include "services/tracer/TracerOnIoOutputInfrastructure.hpp"
+#include <cstdlib>
+
+std::string Env(const char* name)
+{
+    auto result = std::getenv(name);
+    if (result != nullptr)
+        return result;
+    else
+        return "";
+}
 
 int main(int argc, const char* argv[], const char* env[])
 {
@@ -24,7 +34,17 @@ int main(int argc, const char* argv[], const char* env[])
 
     try
     {
-        parser.ParseCLI(argc, argv);
+        std::string firmwareArg = Env("POSTMASTER_FIRMWARE");
+        std::string urlArg = Env("POSTMASTER_IP");
+        std::string passwordArg = Env("POSTMASTER_PASSWORD");
+
+        if (firmwareArg.empty() && urlArg.empty())
+        {
+            parser.ParseCLI(argc, argv);
+            firmwareArg = args::get(firmwareArgument);
+            urlArg = args::get(urlArgument);
+            passwordArg = args::get(passwordArgument);
+        }
 
         static hal::TimerServiceGeneric timerService;
         static hal::SynchronousRandomDataGeneratorGeneric randomDataGenerator;
@@ -32,17 +52,17 @@ int main(int argc, const char* argv[], const char* env[])
         static main_::NetworkAdapter network;
         static hal::FileSystemGeneric fileSystem;
 
-        static auto firmware = firmwareArgument ? fileSystem.ReadBinaryFile(args::get(firmwareArgument)) : std::vector<uint8_t>{};
+        static auto firmware = !firmwareArg.empty() ? fileSystem.ReadBinaryFile(firmwareArg) : std::vector<uint8_t>{};
 
         static services::HttpClientConnectorWithNameResolverImpl<> connector(network.ConnectionFactoryWithNameResolver());
-        static infra::BoundedString::WithStorage<512> httpUrl{ args::get(urlArgument) };
-        static infra::BoundedString::WithStorage<512> webSocketUrl{ args::get(urlArgument) };
-        static application::EchoWebSocketClientFactory webSocketFactory(webSocketUrl, 80, network.ConnectionFactory(), tracer.tracer);
+        static infra::BoundedString::WithStorage<512> httpUrl{ urlArg };
+        static infra::BoundedString::WithStorage<512> webSocketUrl{ urlArg };
+        static application::EchoWebSocketClientFactory webSocketFactory(webSocketUrl, services::PortFromUrl(webSocketUrl).ValueOr(80), network.ConnectionFactory(), tracer.tracer);
         static services::HttpClientWebSocketInitiation webSocketInitiation(webSocketFactory, connector,
             webSocketFactory, randomDataGenerator, services::noAutoConnect);
-        static application::HttpClientAuthenticationDigest::WithMaxHeaders<10> clientAuthentication{ args::get(passwordArgument), randomDataGenerator };
+        static application::HttpClientAuthenticationDigest::WithMaxHeaders<10> clientAuthentication{ passwordArg, randomDataGenerator };
         static services::HttpClientAuthenticationConnector clientAuthenticationConnector{ connector, clientAuthentication };
-        static application::FlexHttpClient httpClient(httpUrl, 80, clientAuthenticationConnector, firmware, webSocketInitiation, tracer.tracer);
+        static application::FlexHttpClient httpClient(httpUrl, services::PortFromUrl(httpUrl).ValueOr(80), clientAuthenticationConnector, firmware, webSocketInitiation, tracer.tracer);
 
         network.ExecuteUntil([&]()
             {
