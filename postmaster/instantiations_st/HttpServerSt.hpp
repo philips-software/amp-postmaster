@@ -11,7 +11,7 @@
 namespace main_
 {
     struct HttpServerSt
-        : public HttpServer
+        : public HttpServerSingleConnection
     {
         HttpServerSt(services::ConnectionFactory& connectionFactory, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
             services::ConfigurationStoreAccess<infra::BoundedString>& attributes, services::ConfigurationStoreAccess<infra::BoundedString>& password,

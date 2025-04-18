@@ -13,15 +13,14 @@
 namespace main_
 {
     struct HttpServerFrontEnd
-        : public services::Stoppable
     {
-        HttpServerFrontEnd(services::ConnectionFactory& connectionFactory, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
+        HttpServerFrontEnd(application::ReportingHttpServer::ConnectionAllocator& allocator, services::ConnectionFactory& connectionFactory, uint16_t port, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
             services::ConfigurationStoreAccess<infra::BoundedString>& attributes, services::ConfigurationStoreAccess<infra::BoundedString>& password,
             application::Authentication& authentication, const infra::Function<void(bool open, services::IPAddress address)>& reporter, const infra::Function<void(bool receiving)>& receivingTarget, const infra::Function<void(bool receiving)>& receivingSelf);
 
-        void Stop(const infra::Function<void()>& onDone) override
+        void Stop(const infra::Function<void()>& onDone)
         {
-            server.Stop(onDone);
+            server.Stop(onDone, true);
         }
 
         services::HttpPageWithContent frontendHtml{ "", page_contents::indexHtml, "text/html;charset=UTF-8" };
@@ -29,7 +28,7 @@ namespace main_
         services::HttpPageWithContent frontendJs{ "upload.js", page_contents::uploadJs, "text/javascript" };
         application::AuthenticatedHttpPage::WithPage<application::HttpPageConfiguration> configuration;
 
-        application::ReportingHttpServer::WithBuffer<8192> server;
+        application::ReportingHttpServer server;
     };
 }
 

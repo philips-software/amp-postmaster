@@ -2,12 +2,21 @@
 
 namespace main_
 {
-    HttpServer::HttpServer(services::ConnectionFactory& connectionFactory, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
+    HttpServer::HttpServer(application::ReportingHttpServer::ConnectionAllocator& allocator, services::ConnectionFactory& connectionFactory, uint16_t port, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
+        services::ConfigurationStoreAccess<infra::BoundedString>& attributes, services::ConfigurationStoreAccess<infra::BoundedString>& password,
+        application::Authentication& authentication, application::PostmasterDiscovery& postmasterDiscovery,
+        const infra::Function<void(bool open, services::IPAddress address)>& reporter, const infra::Function<void(bool receiving)>& receivingTarget, const infra::Function<void(bool receiving)>& receivingSelf)
+        : HttpServerFrontEnd(allocator, connectionFactory, port, hostname, attributes, password, authentication, reporter, receivingTarget, receivingSelf)
+        , discovery("discovery", postmasterDiscovery)
+    {
+        server.AddPage(discovery);
+    }
+
+    HttpServerSingleConnection::HttpServerSingleConnection(services::ConnectionFactory& connectionFactory, uint16_t port, services::ConfigurationStoreAccess<infra::BoundedString>& hostname,
         services::ConfigurationStoreAccess<infra::BoundedString>& attributes, services::ConfigurationStoreAccess<infra::BoundedString>& password,
         application::Authentication& authentication, application::PostmasterDiscovery& postmasterDiscovery,
         UartCreator& uartProgrammerCreator, UartCreator& uartExternalCreator, hal::Flash& upgradeFlash, hal::Reset& reset, const infra::Function<void(bool open, services::IPAddress address)>& reporter, const infra::Function<void(bool receiving)>& receivingTarget, const infra::Function<void(bool receiving)>& receivingSelf, hal::GpioPin& resetTarget, hal::GpioPin& boot0)
-        : HttpServerFrontEnd(connectionFactory, hostname, attributes, password, authentication, reporter, receivingTarget, receivingSelf)
-        , discovery("discovery", postmasterDiscovery)
+        : HttpServer::WithConnections<1>(connectionFactory, port, hostname, attributes, password, authentication, postmasterDiscovery, reporter, receivingTarget, receivingSelf)
         , uartProgrammerCreator(uartProgrammerCreator)
         , uartExternalCreator(uartExternalCreator)
         , selfFirmwarePage{ authentication, "firmware/self" }
@@ -25,6 +34,5 @@ namespace main_
         server.AddPage(targetUartExternal.page);
         server.AddPage(targetUartEchoProgrammer.page);
         server.AddPage(targetUartEchoExternal.page);
-        server.AddPage(discovery);
     }
 }
