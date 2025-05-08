@@ -6,6 +6,7 @@
 #include "postmaster/programmer/FirmwareReceptorReporting.hpp"
 #include "postmaster/programmer/FirmwareReceptorResetTarget.hpp"
 #include "postmaster/programmer/FirmwareReceptorToFlash.hpp"
+#include "postmaster/programmer/FlashAligner.hpp"
 #include "postmaster/programmer/HttpPageFirmware.hpp"
 #include "services/st_util/FlashOnStBootloaderCommunicator.hpp"
 #include "services/st_util/StBootloaderCommunicatorUart.hpp"
@@ -60,6 +61,7 @@ namespace main_
             services::StBootloaderCommunicatorUart communicator;
             std::array<uint32_t, 12> sectors{ 0x8000, 0x8000, 0x8000, 0x8000, 0x20000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000 };
             services::FlashHeterogeneousOnStBootloaderCommunicator communicatorFlash{ sectors, communicator };
+            services::FlashAligner::WithAlignment<16> alignedFlash{ communicatorFlash };
             application::FirmwareReceptorToFlash firmwareReceptorToFlash{ communicatorFlash };
         };
 
