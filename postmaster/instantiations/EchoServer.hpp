@@ -45,13 +45,13 @@ namespace main_
         SingleConnectionLink(services::SingleConnectionListener& listener1, services::SingleConnectionListener& listener2);
 
     private:
-        void StopCurrentConnection(services::SingleConnectionListener& listener) override;
+        void StopCurrentConnection(void* listener) override;
         void StartNewConnection() override;
 
     private:
         uint32_t numStopped = 0;
-        services::SingleConnectionListener& listener1;
-        services::SingleConnectionListener& listener2;
+        services::SingleConnectionListener* const listener1;
+        services::SingleConnectionListener* const listener2;
 
         bool listener1RequestedNewConnection = false;
         bool listener2RequestedNewConnection = false;
