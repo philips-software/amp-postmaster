@@ -32,7 +32,7 @@ namespace main_
             protected:
                 void Attached() override
                 {
-                    services::Connection::Attach(infra::MakeContainedSharedObject(bridge.echoConnection, ObserverPtr()));
+                    services::Connection::Attach(infra::MakeContainedSharedObject(bridge.echoConnection, services::ConnectionObserver::Subject().ObserverPtr()));
                 }
 
             private:
