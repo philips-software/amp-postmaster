@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Enabled warnings as error, requires CMake 3.24
 
+## [0.2.0](https://github.com/philips-software/amp-postmaster/compare/v0.1.0...v0.2.0) (2025-05-10)
+
+
+### Features
+
+* Add kicad design for Postmaster ([#51](https://github.com/philips-software/amp-postmaster/issues/51)) ([5b0d990](https://github.com/philips-software/amp-postmaster/commit/5b0d9900bc231ba2a10e43529f035f32f8af2cdc))
+* **deps:** Bump the git-submodules group across 1 directory with 3 updates ([#65](https://github.com/philips-software/amp-postmaster/issues/65)) ([9473c1d](https://github.com/philips-software/amp-postmaster/commit/9473c1d3efd021cd0ad530f573b0ce2613c047ab))
+* Publish flex docker image ([#5](https://github.com/philips-software/amp-postmaster/issues/5)) ([e3fc05b](https://github.com/philips-software/amp-postmaster/commit/e3fc05ba389df427653b57ea76c12f334beb6b95))
+
+
+### Bug Fixes
+
+* Attach from correct SharedPtr ([f00cf1e](https://github.com/philips-software/amp-postmaster/commit/f00cf1e85892faf4e9c6b0aa95d7596bd946d101))
+
 ## v0.0.1
 
 - Example Release
