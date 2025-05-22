@@ -46,13 +46,15 @@ namespace application
 
     void FirmwareReceptorResetTarget::ReceptionStopped(const infra::Function<void()>& onDone)
     {
-        (*delegate)->ReceptionStopped(onDone);
-
+        this->onDone = onDone;
+        
+        (*delegate)->ReceptionStopped([this]()
         {
             hal::OutputPin activateReset(reset, false);
             activateBoot0 = infra::none;
 
             delegate = infra::none;
-        }
+            this->onDone();
+        });
     }
 }

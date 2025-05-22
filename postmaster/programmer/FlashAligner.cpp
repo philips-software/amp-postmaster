@@ -9,6 +9,7 @@ namespace services
 
     void FlashAligner::Flush(const infra::Function<void()>& onDone)
     {
+        alignedBuffer.resize(alignedBuffer.max_size());
         FlashDelegate::WriteBuffer(infra::MakeRange(alignedBuffer), address, onDone);
     }
 

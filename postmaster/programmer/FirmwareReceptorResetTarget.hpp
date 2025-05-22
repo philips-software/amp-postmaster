@@ -1,5 +1,6 @@
 #include "hal/interfaces/Gpio.hpp"
 #include "infra/timer/Timer.hpp"
+#include "infra/util/AutoResetFunction.hpp"
 #include "infra/util/Optional.hpp"
 #include "infra/util/ProxyCreator.hpp"
 #include "postmaster/programmer/FirmwareReceptor.hpp"
@@ -30,5 +31,7 @@ namespace application
 
         infra::TimerSingleShot timer;
         infra::SharedPtr<infra::StreamReaderWithRewinding> saveReader;
+
+        infra::AutoResetFunction<void()> onDone;
     };
 }
