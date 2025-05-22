@@ -10,6 +10,7 @@ namespace application
 
     void FirmwareReceptorResetTarget::ReceptionStarted()
     {
+        starting = true;
         activateReset.Emplace(reset, false);
         activateBoot0.Emplace(boot0, true);
 
