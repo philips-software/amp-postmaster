@@ -15,6 +15,8 @@ target_sources(postmaster.programmer PRIVATE
     FirmwareReceptorResetWhenDone.hpp
     FirmwareReceptorToFlash.cpp
     FirmwareReceptorToFlash.hpp
+    FlashAligner.cpp
+    FlashAligner.hpp
     HttpPageFirmware.cpp
     HttpPageFirmware.hpp
     TargetUartConnection.cpp

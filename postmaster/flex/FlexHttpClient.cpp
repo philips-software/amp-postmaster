@@ -51,11 +51,16 @@ namespace application
             tracer.Trace() << infra::ByteRangeAsString(stream.ContiguousRange());
     }
 
+    void FlexHttpClient::BodyComplete()
+    {
+        inBodyComplete = true;
+        HttpClientBasic::BodyComplete();
+        inBodyComplete = false;
+    }
+
     void FlexHttpClient::Done()
     {
         tracer.Trace() << "Done";
-
-        httpClient->Attach(infra::UnOwnedSharedPtr(webSocketInitiation));
     }
 
     void FlexHttpClient::Error(bool intermittentFailure)
@@ -69,5 +74,8 @@ namespace application
     void FlexHttpClient::CloseConnection()
     {
         Subject().Detach();
+
+        if (inBodyComplete)
+            httpClient->Attach(infra::UnOwnedSharedPtr(webSocketInitiation));
     }
 }

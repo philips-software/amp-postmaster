@@ -59,21 +59,26 @@ namespace application
 
         if (receptor != nullptr && !access.Referenced())
         {
-            receptor->ReceptionStopped();
-            connection->SendResponse(services::httpResponseNoContent);
+            receptor->ReceptionStopped([this]()
+                {
+                    if (connection != nullptr)
+                        connection->SendResponse(services::httpResponseNoContent);
+                    connection = nullptr;
+                });
         }
-
-        connection = nullptr;
+        else
+            connection = nullptr;
     }
 
     void HttpPageFirmware::ReaderUnreferenced()
     {
         if (!active)
         {
-            receptor->ReceptionStopped();
-
-            if (connection != nullptr)
-                connection->SendResponse(services::httpResponseNoContent);
+            receptor->ReceptionStopped([this]()
+                {
+                    if (connection != nullptr)
+                        connection->SendResponse(services::httpResponseNoContent);
+                });
         }
 
         reader = nullptr;

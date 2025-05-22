@@ -21,6 +21,7 @@ namespace application
         void StatusAvailable(services::HttpStatusCode statusCode) override;
         void HeaderAvailable(services::HttpHeader header) override;
         void BodyAvailable(infra::SharedPtr<infra::StreamReader>&& reader);
+        void BodyComplete() override;
         void Done() override;
         void Error(bool intermittentFailure) override;
         void CloseConnection() override;
@@ -32,6 +33,7 @@ namespace application
 
         services::HttpClient* httpClient = nullptr;
         bool detached = false;
+        bool inBodyComplete = false;
     };
 }
 

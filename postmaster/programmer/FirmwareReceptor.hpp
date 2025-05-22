@@ -17,7 +17,7 @@ namespace application
     public:
         virtual void ReceptionStarted() = 0;
         virtual void DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader) = 0;
-        virtual void ReceptionStopped() = 0;
+        virtual void ReceptionStopped(const infra::Function<void()>& onDone) = 0;
     };
 }
 

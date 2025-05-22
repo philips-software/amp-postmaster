@@ -10,30 +10,51 @@ namespace application
 
     void FirmwareReceptorResetTarget::ReceptionStarted()
     {
-        {
-            hal::OutputPin activateReset(reset, false);
-            activateBoot0.Emplace(boot0, true);
+        starting = true;
+        activateReset.Emplace(reset, false);
+        activateBoot0.Emplace(boot0, true);
 
-            delegate.Emplace(delegateCreator);
-        }
+        timer.Start(std::chrono::milliseconds(1), [this]()
+            {
+                activateReset->Set(true);
 
-        (*delegate)->ReceptionStarted();
+                timer.Start(std::chrono::milliseconds(1), [this]()
+                    {
+                        activateReset = infra::none;
+
+                        timer.Start(std::chrono::milliseconds(100), [this]()
+                            {
+                                starting = false;
+
+                                delegate.Emplace(delegateCreator);
+                                (*delegate)->ReceptionStarted();
+
+                                if (saveReader != nullptr)
+                                    DataReceived(std::move(saveReader));
+                            });
+                    });
+            });
     }
 
     void FirmwareReceptorResetTarget::DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader)
     {
-        (*delegate)->DataReceived(std::move(reader));
+        if (starting)
+            saveReader = std::move(reader);
+        else
+            (*delegate)->DataReceived(std::move(reader));
     }
 
-    void FirmwareReceptorResetTarget::ReceptionStopped()
+    void FirmwareReceptorResetTarget::ReceptionStopped(const infra::Function<void()>& onDone)
     {
-        (*delegate)->ReceptionStopped();
-
+        this->onDone = onDone;
+        
+        (*delegate)->ReceptionStopped([this]()
         {
             hal::OutputPin activateReset(reset, false);
             activateBoot0 = infra::none;
 
             delegate = infra::none;
-        }
+            this->onDone();
+        });
     }
 }
