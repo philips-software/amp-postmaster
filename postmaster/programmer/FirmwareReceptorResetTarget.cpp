@@ -1,5 +1,4 @@
 #include "postmaster/programmer/FirmwareReceptorResetTarget.hpp"
-extern "C" void HAL_Delay(uint32_t Delay);
 
 namespace application
 {
@@ -11,25 +10,37 @@ namespace application
 
     void FirmwareReceptorResetTarget::ReceptionStarted()
     {
-        {
-            hal::OutputPin activateReset(reset, false);
-            activateBoot0.Emplace(boot0, true);
+        activateReset.Emplace(reset, false);
+        activateBoot0.Emplace(boot0, true);
 
-       
-            HAL_Delay(1);
-            activateReset.Set(true);
-            HAL_Delay(1);
-        }
+        timer.Start(std::chrono::milliseconds(1), [this]()
+            {
+                activateReset->Set(true);
 
-        HAL_Delay(100);
-        delegate.Emplace(delegateCreator);
+                timer.Start(std::chrono::milliseconds(1), [this]()
+                    {
+                        activateReset = infra::none;
 
-        (*delegate)->ReceptionStarted();
+                        timer.Start(std::chrono::milliseconds(100), [this]()
+                            {
+                                starting = false;
+
+                                delegate.Emplace(delegateCreator);
+                                (*delegate)->ReceptionStarted();
+
+                                if (saveReader != nullptr)
+                                    DataReceived(std::move(saveReader));
+                            });
+                    });
+            });
     }
 
     void FirmwareReceptorResetTarget::DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader)
     {
-        (*delegate)->DataReceived(std::move(reader));
+        if (starting)
+            saveReader = std::move(reader);
+        else
+            (*delegate)->DataReceived(std::move(reader));
     }
 
     void FirmwareReceptorResetTarget::ReceptionStopped()
