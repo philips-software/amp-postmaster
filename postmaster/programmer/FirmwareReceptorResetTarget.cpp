@@ -1,4 +1,5 @@
 #include "postmaster/programmer/FirmwareReceptorResetTarget.hpp"
+extern "C" void HAL_Delay(uint32_t Delay);
 
 namespace application
 {
@@ -14,8 +15,14 @@ namespace application
             hal::OutputPin activateReset(reset, false);
             activateBoot0.Emplace(boot0, true);
 
-            delegate.Emplace(delegateCreator);
+       
+            HAL_Delay(1);
+            activateReset.Set(true);
+            HAL_Delay(1);
         }
+
+        HAL_Delay(100);
+        delegate.Emplace(delegateCreator);
 
         (*delegate)->ReceptionStarted();
     }

@@ -7,15 +7,17 @@ namespace application
         : flash(flash)
     {}
 
+    void FirmwareReceptorToFlash::FlashInitializationDone()
+    {
+        busy = false;
+
+        TryEraseAll();
+    }
+
     void FirmwareReceptorToFlash::ReceptionStarted()
     {
-        index = 0;
-
-        busy = true;
-        flash.EraseAll([this]()
-            {
-                OnEraseDone();
-            });
+        receptionStarted = true;
+        TryEraseAll();
     }
 
     void FirmwareReceptorToFlash::DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader)
@@ -41,6 +43,20 @@ namespace application
             flash.WriteBuffer(range, infra::PostAssign(index, index + range.size()), [this]()
                 {
                     reader = nullptr;
+                });
+        }
+    }
+
+    void FirmwareReceptorToFlash::TryEraseAll()
+    {
+        if (!busy && receptionStarted)
+        {
+            index = 0;
+
+            busy = true;
+            flash.EraseAll([this]()
+                {
+                    OnEraseDone();
                 });
         }
     }

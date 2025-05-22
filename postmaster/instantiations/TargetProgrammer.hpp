@@ -1,6 +1,7 @@
 #ifndef POSTMASTER_TARGET_PROGRAMMER_HPP
 #define POSTMASTER_TARGET_PROGRAMMER_HPP
 
+#include "infra/event/EventDispatcher.hpp"
 #include "infra/util/Function.hpp"
 #include "postmaster/instantiations/UartCreator.hpp"
 #include "postmaster/programmer/FirmwareReceptorReporting.hpp"
@@ -21,19 +22,31 @@ namespace main_
             , receptorResetTarget(reset, boot0, stateCreator)
             , firmwareReceptorReporting(receptorResetTarget, receiving)
             , stateCreator([this]() -> application::FirmwareReceptor&
-                  {
-                      state.Emplace(this->uartProgrammerCreator, infra::emptyFunction, [this](infra::BoundedConstString reason)
-                          {
-                              this->page.Close();
-                              this->page.ResetReceptor(reason);
-                              this->page.SetReceptor(firmwareReceptorReporting);
-                          });
-                      return state->firmwareReceptorToFlash;
-                  },
-                  [this]()
-                  {
-                      state = infra::none;
-                  })
+                {
+                    really_assert(!state);
+                    state.Emplace(
+                        this->uartProgrammerCreator, [this]()
+                        {
+                            state->firmwareReceptorToFlash.FlashInitializationDone();
+                        },
+                        [this](infra::BoundedConstString reason)
+                        {
+                            this->page.Close();
+                            this->page.ResetReceptor(reason);
+                            this->page.SetReceptor(firmwareReceptorReporting);
+                        });
+                    return state->firmwareReceptorToFlash;
+                },
+                [this]()
+                {
+                    state->Stop();
+                    // The state is not destroyed immediately; any scheduled UART data must first be processed. By scheduling
+                    // this as an event, other events are first handled
+                    infra::EventDispatcher::Instance().Schedule([this]()
+                        {
+                            state = infra::none;
+                        });
+                })
         {
             this->page.SetReceptor(firmwareReceptorReporting);
         }
@@ -56,13 +69,18 @@ namespace main_
                 , communicator(*serial, onInitialized, onError)
             {}
 
+            void Stop()
+            {
+                communicator.Stop();
+            }
+
             infra::ProxyCreator<UartCreator&> serial;
 
             services::StBootloaderCommunicatorUart communicator;
             std::array<uint32_t, 12> sectors{ 0x8000, 0x8000, 0x8000, 0x8000, 0x20000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000 };
             services::FlashHeterogeneousOnStBootloaderCommunicator communicatorFlash{ sectors, communicator };
             services::FlashAligner::WithAlignment<16> alignedFlash{ communicatorFlash };
-            application::FirmwareReceptorToFlash firmwareReceptorToFlash{ communicatorFlash };
+            application::FirmwareReceptorToFlash firmwareReceptorToFlash{ alignedFlash };
         };
 
         UartCreator& uartProgrammerCreator;

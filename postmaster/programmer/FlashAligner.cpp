@@ -36,7 +36,7 @@ namespace services
             auto range = infra::Head(buffer, buffer.size() - buffer.size() % alignedBuffer.max_size());
             alignedBuffer.insert(alignedBuffer.end(), range.end(), buffer.end());
 
-            FlashDelegate::WriteBuffer(infra::MakeRange(alignedBuffer), address, onDone);
+            FlashDelegate::WriteBuffer(range, address, onDone);
         }
     }
 }

@@ -12,6 +12,8 @@ namespace application
     public:
         FirmwareReceptorToFlash(hal::Flash& flash);
 
+        void FlashInitializationDone();
+
         virtual void ReceptionStarted() override;
         virtual void DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader) override;
         virtual void ReceptionStopped() override;
@@ -19,12 +21,14 @@ namespace application
     private:
         void OnEraseDone();
         void TryWrite();
+        void TryEraseAll();
 
     private:
         hal::Flash& flash;
         infra::SharedPtr<infra::StreamReaderWithRewinding> reader;
         uint32_t index = 0;
-        bool busy = false;
+        bool busy = true;
+        bool receptionStarted = false;
     };
 }
 
