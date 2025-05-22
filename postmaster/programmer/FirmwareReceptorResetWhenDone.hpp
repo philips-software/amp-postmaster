@@ -15,7 +15,7 @@ namespace application
 
         virtual void ReceptionStarted() override;
         virtual void DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader) override;
-        virtual void ReceptionStopped() override;
+        virtual void ReceptionStopped(const infra::Function<void()>& onDone) override;
 
     private:
         FirmwareReceptor& delegate;

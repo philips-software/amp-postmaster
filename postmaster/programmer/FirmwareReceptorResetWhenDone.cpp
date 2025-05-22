@@ -18,9 +18,9 @@ namespace application
         delegate.DataReceived(std::move(reader));
     }
 
-    void FirmwareReceptorResetWhenDone::ReceptionStopped()
+    void FirmwareReceptorResetWhenDone::ReceptionStopped(const infra::Function<void()>& onDone)
     {
-        delegate.ReceptionStopped();
+        delegate.ReceptionStopped(onDone);
         delayedReboot.Start(std::chrono::seconds(1), [this]()
             {
                 reset.ResetModule("Firmare reception done");

@@ -1,4 +1,3 @@
-
 #include "postmaster/programmer/FlashAligner.hpp"
 
 namespace services
@@ -7,6 +6,11 @@ namespace services
         : FlashDelegate(delegate)
         , alignedBuffer(buffer)
     {}
+
+    void FlashAligner::Flush(const infra::Function<void()>& onDone)
+    {
+        FlashDelegate::WriteBuffer(infra::MakeRange(alignedBuffer), address, onDone);
+    }
 
     void FlashAligner::WriteBuffer(infra::ConstByteRange buffer, uint32_t address, infra::Function<void()> onDone)
     {
@@ -37,6 +41,7 @@ namespace services
             alignedBuffer.insert(alignedBuffer.end(), range.end(), buffer.end());
 
             FlashDelegate::WriteBuffer(range, address, onDone);
+            this->address = address + range.size();
         }
     }
 }

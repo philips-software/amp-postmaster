@@ -18,9 +18,9 @@ namespace application
         delegate.DataReceived(std::move(reader));
     }
 
-    void FirmwareReceptorReporting::ReceptionStopped()
+    void FirmwareReceptorReporting::ReceptionStopped(const infra::Function<void()>& onDone)
     {
-        delegate.ReceptionStopped();
+        delegate.ReceptionStopped(onDone);
         reporter(false);
     }
 }

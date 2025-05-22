@@ -3,8 +3,9 @@
 
 namespace application
 {
-    FirmwareReceptorToFlash::FirmwareReceptorToFlash(hal::Flash& flash)
+    FirmwareReceptorToFlash::FirmwareReceptorToFlash(hal::Flash& flash, const infra::Function<void(const infra::Function<void()>& onDone)>& onReceptionDone)
         : flash(flash)
+        , onReceptionDone(onReceptionDone)
     {}
 
     void FirmwareReceptorToFlash::FlashInitializationDone()
@@ -26,8 +27,10 @@ namespace application
         TryWrite();
     }
 
-    void FirmwareReceptorToFlash::ReceptionStopped()
-    {}
+    void FirmwareReceptorToFlash::ReceptionStopped(const infra::Function<void()>& onDone)
+    {
+        onReceptionDone(onDone);
+    }
 
     void FirmwareReceptorToFlash::OnEraseDone()
     {

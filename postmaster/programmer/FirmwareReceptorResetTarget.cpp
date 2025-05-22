@@ -44,9 +44,9 @@ namespace application
             (*delegate)->DataReceived(std::move(reader));
     }
 
-    void FirmwareReceptorResetTarget::ReceptionStopped()
+    void FirmwareReceptorResetTarget::ReceptionStopped(const infra::Function<void()>& onDone)
     {
-        (*delegate)->ReceptionStopped();
+        (*delegate)->ReceptionStopped(onDone);
 
         {
             hal::OutputPin activateReset(reset, false);

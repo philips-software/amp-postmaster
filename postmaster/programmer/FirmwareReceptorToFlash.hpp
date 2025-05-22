@@ -10,13 +10,17 @@ namespace application
         : public FirmwareReceptor
     {
     public:
-        FirmwareReceptorToFlash(hal::Flash& flash);
+        FirmwareReceptorToFlash(
+            hal::Flash& flash, const infra::Function<void(const infra::Function<void()>& onDone)>& onReceptionDone = [](const infra::Function<void()>& onDone)
+                               {
+                                   onDone();
+                               });
 
         void FlashInitializationDone();
 
         virtual void ReceptionStarted() override;
         virtual void DataReceived(infra::SharedPtr<infra::StreamReaderWithRewinding>&& reader) override;
-        virtual void ReceptionStopped() override;
+        virtual void ReceptionStopped(const infra::Function<void()>& onDone) override;
 
     private:
         void OnEraseDone();
@@ -25,6 +29,7 @@ namespace application
 
     private:
         hal::Flash& flash;
+        infra::Function<void(const infra::Function<void()>& onDone)> onReceptionDone;
         infra::SharedPtr<infra::StreamReaderWithRewinding> reader;
         uint32_t index = 0;
         bool busy = true;

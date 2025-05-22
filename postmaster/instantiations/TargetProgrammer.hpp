@@ -22,31 +22,31 @@ namespace main_
             , receptorResetTarget(reset, boot0, stateCreator)
             , firmwareReceptorReporting(receptorResetTarget, receiving)
             , stateCreator([this]() -> application::FirmwareReceptor&
-                {
-                    really_assert(!state);
-                    state.Emplace(
-                        this->uartProgrammerCreator, [this]()
-                        {
-                            state->firmwareReceptorToFlash.FlashInitializationDone();
-                        },
-                        [this](infra::BoundedConstString reason)
-                        {
-                            this->page.Close();
-                            this->page.ResetReceptor(reason);
-                            this->page.SetReceptor(firmwareReceptorReporting);
-                        });
-                    return state->firmwareReceptorToFlash;
-                },
-                [this]()
-                {
-                    state->Stop();
-                    // The state is not destroyed immediately; any scheduled UART data must first be processed. By scheduling
-                    // this as an event, other events are first handled
-                    infra::EventDispatcher::Instance().Schedule([this]()
-                        {
-                            state = infra::none;
-                        });
-                })
+                  {
+                      really_assert(!state);
+                      state.Emplace(
+                          this->uartProgrammerCreator, [this]()
+                          {
+                              state->firmwareReceptorToFlash.FlashInitializationDone();
+                          },
+                          [this](infra::BoundedConstString reason)
+                          {
+                              this->page.Close();
+                              this->page.ResetReceptor(reason);
+                              this->page.SetReceptor(firmwareReceptorReporting);
+                          });
+                      return state->firmwareReceptorToFlash;
+                  },
+                  [this]()
+                  {
+                      state->Stop();
+                      // The state is not destroyed immediately; any scheduled UART data must first be processed. By scheduling
+                      // this as an event, other events are first handled
+                      infra::EventDispatcher::Instance().Schedule([this]()
+                          {
+                              state = infra::none;
+                          });
+                  })
         {
             this->page.SetReceptor(firmwareReceptorReporting);
         }
@@ -80,7 +80,10 @@ namespace main_
             std::array<uint32_t, 12> sectors{ 0x8000, 0x8000, 0x8000, 0x8000, 0x20000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000, 0x40000 };
             services::FlashHeterogeneousOnStBootloaderCommunicator communicatorFlash{ sectors, communicator };
             services::FlashAligner::WithAlignment<16> alignedFlash{ communicatorFlash };
-            application::FirmwareReceptorToFlash firmwareReceptorToFlash{ alignedFlash };
+            application::FirmwareReceptorToFlash firmwareReceptorToFlash{ alignedFlash, [this](const infra::Function<void()>& onDone)
+                {
+                    alignedFlash.Flush(onDone);
+                } };
         };
 
         UartCreator& uartProgrammerCreator;

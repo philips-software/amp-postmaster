@@ -19,6 +19,8 @@ namespace services
 
         FlashAligner(infra::BoundedVector<uint8_t>& buffer, hal::Flash& delegate);
 
+        void Flush(const infra::Function<void()>& onDone);
+
         void WriteBuffer(infra::ConstByteRange buffer, uint32_t address, infra::Function<void()> onDone) override;
 
     private:
