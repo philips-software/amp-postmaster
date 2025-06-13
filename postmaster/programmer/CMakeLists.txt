@@ -33,3 +33,5 @@ target_link_libraries(postmaster.programmer PUBLIC
     services.st_util
     protobuf.echo
 )
+
+add_subdirectory(test)

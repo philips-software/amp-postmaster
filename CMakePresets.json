@@ -14,6 +14,7 @@
       "generator": "Ninja Multi-Config",
       "cacheVariables": {
         "CMAKE_CONFIGURATION_TYPES": "Debug;RelWithDebInfo",
+        "POSTMASTER_BUILD_TESTS": true,
         "EMIL_BUILD_TESTS": true
       }
     },

@@ -42,12 +42,12 @@ namespace main_
             infra::ProxyCreator<hal::SerialCommunication, void(const UartConfig& config)> serial;
             services::MethodSerializerFactory::ForServices<>::AndProxies<> serializerFactory;
             hal::BufferedSerialCommunicationOnUnbuffered::WithStorage<256> bufferedSerial{ *serial };
-            main_::EchoOnSesame<256> echoUart{ bufferedSerial, serializerFactory };
+            main_::EchoOnSesame::WithMessageSize<256> echoUart{ bufferedSerial, serializerFactory };
             services::EchoOnConnection echoConnection{ serializerFactory };
             WebSocketServerConnectionObserver webSocket{ *this };
 
-            services::ServiceForwarderAll forwardLeft{ echoUart, echoConnection };
-            services::ServiceForwarderAll forwardRight{ echoConnection, echoUart };
+            services::ServiceForwarderAll forwardLeft{ echoUart.echo, echoConnection };
+            services::ServiceForwarderAll forwardRight{ echoConnection, echoUart.echo };
 
             operator services::ConnectionObserver&();
             operator const services::ConnectionObserver&() const;
