@@ -9,16 +9,22 @@ namespace application
         , tracer(tracer)
     {
         if (!firmware.empty())
+        {
+            tracer.Trace() << "Connecting over HTTP to " << services::HostFromUrl(url) << " port " << port;
             Connect();
+        }
         else
+        {
+            tracer.Trace() << "Connecting web socket to " << services::HostFromUrl(url) << " port " << port;
             connector.Connect(webSocketInitiation);
+        }
     }
 
     void FlexHttpClient::Attached()
     {
         HttpClientBasic::Attached();
 
-        tracer.Trace() << "Attached";
+        tracer.Trace() << "Uploading firmware";
         infra::BoundedString path = Path();
         path += "/firmware/target";
 
@@ -76,6 +82,9 @@ namespace application
         Subject().Detach();
 
         if (inBodyComplete)
+        {
+            tracer.Trace() << "Upgrading to web socket";
             httpClient->Attach(infra::UnOwnedSharedPtr(webSocketInitiation));
+        }
     }
 }
