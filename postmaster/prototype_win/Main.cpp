@@ -29,7 +29,7 @@ namespace main_
         void ReInitialize(infra::BoundedConstString reason)
         {
             page.ResetReceptor(reason);
-            state.Emplace([this]()
+            state.emplace([this]()
                 {
                     page.SetReceptor(state->firmwareReceptorToFlash);
                 },
