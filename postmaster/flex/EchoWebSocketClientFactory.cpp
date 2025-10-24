@@ -42,7 +42,7 @@ namespace application
         connection.Attach(webSocketConnection);
         webSocketConnection->Attach(echo.Emplace(serializerFactoryWebSocket));
 
-        listener.Emplace(connectionFactory, 1234, services::SingleConnectionListener::Creators{ connectionCreator });
+        listener.emplace(connectionFactory, 1234, services::SingleConnectionListener::Creators{ connectionCreator });
     }
 
     void EchoWebSocketClientFactory::WebSocketInitiationError(WebSocketClientObserverFactory::ConnectFailReason reason)

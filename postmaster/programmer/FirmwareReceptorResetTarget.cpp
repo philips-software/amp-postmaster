@@ -11,8 +11,8 @@ namespace application
     void FirmwareReceptorResetTarget::ReceptionStarted()
     {
         starting = true;
-        activateReset.Emplace(reset, false);
-        activateBoot0.Emplace(boot0, true);
+        activateReset.emplace(reset, false);
+        activateBoot0.emplace(boot0, true);
 
         timer.Start(std::chrono::milliseconds(1), [this]()
             {
@@ -20,13 +20,13 @@ namespace application
 
                 timer.Start(std::chrono::milliseconds(1), [this]()
                     {
-                        activateReset = infra::none;
+                        activateReset = std::nullopt;
 
                         timer.Start(std::chrono::milliseconds(100), [this]()
                             {
                                 starting = false;
 
-                                delegate.Emplace(delegateCreator);
+                                delegate.emplace(delegateCreator);
                                 (*delegate)->ReceptionStarted();
 
                                 if (saveReader != nullptr)
@@ -51,9 +51,9 @@ namespace application
         (*delegate)->ReceptionStopped([this]()
         {
             hal::OutputPin activateReset(reset, false);
-            activateBoot0 = infra::none;
+            activateBoot0 = std::nullopt;
 
-            delegate = infra::none;
+            delegate = std::nullopt;
             this->onDone();
         });
     }

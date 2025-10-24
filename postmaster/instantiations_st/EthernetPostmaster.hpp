@@ -21,9 +21,9 @@ namespace main_
             , attributes{ configuration.store, configuration.store.Configuration().attributes }
             , password{ configuration.store, configuration.store.Configuration().password }
             , authentication{ password, randomDataGenerator }
-            , networkCreator([this](infra::Optional<main_::NetworkConnected>& value, services::LightweightIp& lightweightIp)
+            , networkCreator([this](std::optional<main_::NetworkConnected>& value, services::LightweightIp& lightweightIp)
                   {
-                      value.Emplace(lightweightIp, hostname, attributes, password, authentication, this->upgradePack, this->uartProgrammerCreator, this->uartExternalCreator, this->reset, this->viewStatus);
+                      value.emplace(lightweightIp, hostname, attributes, password, authentication, this->upgradePack, this->uartProgrammerCreator, this->uartExternalCreator, this->reset, this->viewStatus);
                   })
             , ethernet{ ethernetPins, configuration.DeviceMacAddress(), configuration.store.Configuration().hostname, randomDataGenerator, networkCreator }
         {}

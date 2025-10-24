@@ -30,9 +30,9 @@ namespace main_
 
         UartCreator& serialCreator;
 
-        infra::Creator<services::ConnectionObserver, Bridge, void(services::IPAddress address)> bridgeCreator{ [this](infra::Optional<Bridge>& value, services::IPAddress address)
+        infra::Creator<services::ConnectionObserver, Bridge, void(services::IPAddress address)> bridgeCreator{ [this](std::optional<Bridge>& value, services::IPAddress address)
             {
-                value.Emplace(serialCreator);
+                value.emplace(serialCreator);
             } };
 
         services::SingleConnectionListener listener;
