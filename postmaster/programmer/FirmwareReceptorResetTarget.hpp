@@ -22,10 +22,10 @@ namespace application
         hal::GpioPin& boot0;
 
         infra::CreatorBase<FirmwareReceptor, void()>& delegateCreator;
-        std::optional<infra::ProxyCreator<decltype(delegateCreator)>> delegate;
+        infra::Optional<infra::ProxyCreator<decltype(delegateCreator)>> delegate;
 
-        std::optional<hal::OutputPin> activateBoot0;
-        std::optional<hal::OutputPin> activateReset;
+        infra::Optional<hal::OutputPin> activateBoot0;
+        infra::Optional<hal::OutputPin> activateReset;
 
         bool starting = false;
 

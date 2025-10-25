@@ -36,25 +36,25 @@ namespace application
         services::MethodSerializerFactory::OnHeap serializerFactoryListener;
         infra::SharedOptional<services::WebSocketClientConnectionObserver> webSocket;
         infra::SharedOptional<services::EchoOnConnection> echo;
-        std::optional<services::SingleConnectionListener> listener;
-        std::optional<services::EchoOnConnection> listenConnection;
+        infra::Optional<services::SingleConnectionListener> listener;
+        infra::Optional<services::EchoOnConnection> listenConnection;
 
         infra::CreatorExternal<services::ConnectionObserver, void(services::IPAddress address)> connectionCreator{ [this](services::IPAddress address) -> services::ConnectionObserver&
             {
-                listenConnection.emplace(serializerFactoryListener);
-                forwarder1.emplace(*echo, *listenConnection);
-                forwarder2.emplace(*listenConnection, *echo);
+                listenConnection.Emplace(serializerFactoryListener);
+                forwarder1.Emplace(*echo, *listenConnection);
+                forwarder2.Emplace(*listenConnection, *echo);
                 return *listenConnection;
             },
             [this]()
             {
-                forwarder1 = std::nullopt;
-                forwarder2 = std::nullopt;
-                listenConnection = std::nullopt;
+                forwarder1 = infra::none;
+                forwarder2 = infra::none;
+                listenConnection = infra::none;
             } };
 
-        std::optional<services::ServiceForwarderAll> forwarder1;
-        std::optional<services::ServiceForwarderAll> forwarder2;
+        infra::Optional<services::ServiceForwarderAll> forwarder1;
+        infra::Optional<services::ServiceForwarderAll> forwarder2;
     };
 }
 
