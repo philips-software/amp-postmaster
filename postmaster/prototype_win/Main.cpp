@@ -29,7 +29,7 @@ namespace main_
         void ReInitialize(infra::BoundedConstString reason)
         {
             page.ResetReceptor(reason);
-            state.emplace([this]()
+            state.Emplace([this]()
                 {
                     page.SetReceptor(state->firmwareReceptorToFlash);
                 },
@@ -60,7 +60,7 @@ namespace main_
         };
 
         application::HttpPageFirmware& page;
-        std::optional<State> state;
+        infra::Optional<State> state;
     };
 }
 
@@ -135,9 +135,9 @@ int main()
     static services::ConfigurationStoreAccess<infra::BoundedString> attributesAccess{ configurationStore, attributes };
     static services::ConfigurationStoreAccess<infra::BoundedString> passwordAccess{ configurationStore, password };
 
-    infra::Creator<hal::SerialCommunication, hal::UartWindows, void(const main_::UartConfig& config)> serialCreator([](std::optional<hal::UartWindows>& value, const main_::UartConfig& config)
+    infra::Creator<hal::SerialCommunication, hal::UartWindows, void(const main_::UartConfig& config)> serialCreator([](infra::Optional<hal::UartWindows>& value, const main_::UartConfig& config)
         {
-            value.emplace("COM13");
+            value.Emplace("COM13");
         });
 
     static main_::Mdns mdns{ "richard", networkAdapter.DatagramFactory(), networkAdapter.Multicast(), services::IPv4Address{ 1, 2, 5, 6 }, Postmaster::generated::VERSION, Postmaster::generated::VERSION_FULL, "attributes" };
