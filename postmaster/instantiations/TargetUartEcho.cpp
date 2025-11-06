@@ -4,9 +4,9 @@ namespace main_
 {
     TargetUartEcho::TargetUartEcho(application::Authentication& authentication, infra::BoundedConstString url, UartCreator& serialCreator)
         : serialCreator(serialCreator)
-        , targetUartConnectionCreator([this](infra::Optional<Bridge>& value)
+        , targetUartConnectionCreator([this](std::optional<Bridge>& value)
               {
-                  value.Emplace(this->serialCreator);
+                  value.emplace(this->serialCreator);
               })
         , page{ authentication, url, factory }
     {}

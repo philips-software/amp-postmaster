@@ -57,12 +57,12 @@ int main(int argc, const char* argv[], const char* env[])
         static services::HttpClientConnectorWithNameResolverImpl<> connector(network.ConnectionFactoryWithNameResolver());
         static infra::BoundedString::WithStorage<512> httpUrl{ urlArg };
         static infra::BoundedString::WithStorage<512> webSocketUrl{ urlArg };
-        static application::EchoWebSocketClientFactory webSocketFactory(webSocketUrl, services::PortFromUrl(webSocketUrl).ValueOr(80), network.ConnectionFactory(), tracer.tracer);
+        static application::EchoWebSocketClientFactory webSocketFactory(webSocketUrl, services::PortFromUrl(webSocketUrl).value_or(80), network.ConnectionFactory(), tracer.tracer);
         static services::HttpClientWebSocketInitiation webSocketInitiation(webSocketFactory, connector,
             webSocketFactory, randomDataGenerator, services::noAutoConnect);
         static application::HttpClientAuthenticationDigest::WithMaxHeaders<10> clientAuthentication{ passwordArg, randomDataGenerator };
         static services::HttpClientAuthenticationConnector clientAuthenticationConnector{ connector, clientAuthentication };
-        static application::FlexHttpClient httpClient(httpUrl, services::PortFromUrl(httpUrl).ValueOr(80), clientAuthenticationConnector, firmware, webSocketInitiation, tracer.tracer);
+        static application::FlexHttpClient httpClient(httpUrl, services::PortFromUrl(httpUrl).value_or(80), clientAuthenticationConnector, firmware, webSocketInitiation, tracer.tracer);
 
         network.ExecuteUntil([&]()
             {

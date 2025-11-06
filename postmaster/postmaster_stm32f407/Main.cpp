@@ -62,13 +62,13 @@ namespace main_
     {
         TargetUarts(hal::DmaStm& dma)
             : uartTransmitStream{ dma, hal::DmaChannelId{ 2, 7, 4 } }
-            , uartProgrammerCreator{ [this, &dma](infra::Optional<hal::UartStmDma>& value, const UartConfig& config)
+            , uartProgrammerCreator{ [this, &dma](std::optional<hal::UartStmDma>& value, const UartConfig& config)
                 {
-                    value.Emplace(uartTransmitStream, 1, uartProgrammerTx, uartProgrammerRx, Convert(config));
+                    value.emplace(uartTransmitStream, 1, uartProgrammerTx, uartProgrammerRx, Convert(config));
                 } }
-            , uartExternalCreator{ [this, &dma](infra::Optional<hal::UartStmDma>& value, const UartConfig& config)
+            , uartExternalCreator{ [this, &dma](std::optional<hal::UartStmDma>& value, const UartConfig& config)
                 {
-                    value.Emplace(uartTransmitStream, 1, uartExternalTx, uartExternalRx, Convert(config));
+                    value.emplace(uartTransmitStream, 1, uartExternalTx, uartExternalRx, Convert(config));
                 } }
         {}
 

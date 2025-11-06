@@ -24,7 +24,7 @@ namespace main_
             , stateCreator([this]() -> application::FirmwareReceptor&
                   {
                       really_assert(!state);
-                      state.Emplace(
+                      state.emplace(
                           this->uartProgrammerCreator, [this]()
                           {
                               state->firmwareReceptorToFlash.FlashInitializationDone();
@@ -44,7 +44,7 @@ namespace main_
                       // this as an event, other events are first handled
                       infra::EventDispatcher::Instance().Schedule([this]()
                           {
-                              state = infra::none;
+                              state = std::nullopt;
                           });
                   })
         {
@@ -91,7 +91,7 @@ namespace main_
 
         application::FirmwareReceptorResetTarget receptorResetTarget;
         application::FirmwareReceptorReporting firmwareReceptorReporting;
-        infra::Optional<State> state;
+        std::optional<State> state;
         infra::CreatorExternal<application::FirmwareReceptor, void()> stateCreator;
     };
 }
