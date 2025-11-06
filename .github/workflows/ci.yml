@@ -47,3 +47,9 @@ jobs:
           configurePreset: "${{ matrix.target }}"
           buildPreset: "${{ matrix.target }}-${{ matrix.configuration }}"
           configurePresetAdditionalArgs: "['-DCMAKE_C_COMPILER_LAUNCHER=ccache', '-DCMAKE_CXX_COMPILER_LAUNCHER=ccache']"
+      - if: ${{ matrix.target == 'windows' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: WindowsDiscovery
+          path: ${{ github.workspace }}/build/host/postmaster/discovery/RelWithDebInfo/*.exe
+          retention-days: 8
