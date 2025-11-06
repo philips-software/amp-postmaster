@@ -30,7 +30,7 @@ namespace main_
                       infra::BoundedString::WithStorage<65> result{ configuration.store.Configuration().hostname };
                       result.push_back(0);
                       return result;
-                  })
+                  }())
 
             , ethernet{ ethernetPins, configuration.DeviceMacAddress(), zeroTerminatedHostname, randomDataGenerator, networkCreator }
         {}
