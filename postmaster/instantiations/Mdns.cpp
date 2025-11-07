@@ -7,7 +7,7 @@ namespace main_
         , version{ Create<16>(version, "vs") }
         , versionFull{ Create<19>(versionFull, "vf") }
         , attributes{ Create<67>(attributes, "at") }
-        , server(factory, multicast, hostname, "postmaster", "_tcp", infra::MakeOptional(ipAddress), infra::none, 80, text)
+        , server(factory, multicast, hostname, "postmaster", "_tcp", std::make_optional(ipAddress), std::nullopt, 80, text)
     {}
 
     template<std::size_t Size>

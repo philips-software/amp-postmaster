@@ -18,9 +18,9 @@ namespace application
         : SingleConnectionListener(connectionFactory, port, { connectionCreator })
         , reporter(reporter)
         , buffer(buffer)
-        , connectionCreator([this](infra::Optional<ReportingHttpServerConnectionObserver>& value, services::IPAddress address)
+        , connectionCreator([this](std::optional<ReportingHttpServerConnectionObserver>& value, services::IPAddress address)
               {
-                  value.Emplace(this->buffer, *this, this->reporter, address);
+                  value.emplace(this->buffer, *this, this->reporter, address);
               })
     {}
 }
