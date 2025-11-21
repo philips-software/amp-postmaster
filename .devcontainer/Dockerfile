@@ -1,4 +1,4 @@
-FROM ghcr.io/philips-software/amp-devcontainer-cpp:v6.5.0@sha256:ee6fc072861425a6492b13a588afe3b5d09c038f3335ff6e707fd70416edf932
+FROM ghcr.io/philips-software/amp-devcontainer-cpp:v6.6.0@sha256:3f65569a719ca9b2d996222bcdce3dfe9797903ba4c3aafff364fa6fe9ca114d
 
 ARG SEGGER_JLINK_VERSION=V872a
 
