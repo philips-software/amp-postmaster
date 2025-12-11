@@ -39,7 +39,7 @@ namespace main_
         services::ViewPainterBufferedDisplay::WithBuffer<32, 128, infra::PixelFormat::blackandwhite> painter{ display, bitmapPainter };
         services::ViewPainterAlignedForSsd1306 painterAligned{ painter };
 
-        services::ViewRotating::WithView<services::ViewPanel::WithView<services::HorizontalLayout::WithMaxViews<2>>> displayView{ infra::RightAngle::angle_270, infra::Colour::black };
+        services::ViewRotating::WithView<services::ViewPanel::WithView<services::HorizontalLayout::WithMaxViews<2>>> displayView{ infra::RightAngle::angle_270, infra::Colour::black, 2 };
 
         services::ViewRepainterPaintWhenDirty repainter{ painterAligned, displayView };
 
