@@ -53,3 +53,11 @@ jobs:
           name: WindowsDiscovery
           path: ${{ github.workspace }}/build/**/*.exe
           retention-days: 8
+      - if: ${{ matrix.target == 'stm32f407' && matrix.configuration == 'RelWithDebInfo' }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: Postmaster
+          path: |
+            ${{ github.workspace }}/build/stm32f407/postmaster/bootloader/RelWithDebInfo/*
+            ${{ github.workspace }}/build/stm32f407/postmaster/postmaster_stm32f407/RelWithDebInfo/*
+          retention-days: 8
