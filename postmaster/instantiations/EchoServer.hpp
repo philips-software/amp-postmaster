@@ -7,6 +7,25 @@
 
 namespace main_
 {
+    class EchoOnConnection
+        : public services::EchoOnConnection
+    {
+    public:
+        EchoOnConnection(services::EchoOnSesame& otherEcho, services::MethodSerializerFactory& serializerFactory)
+            : services::EchoOnConnection(serializerFactory)
+            , otherEcho(otherEcho)
+        {}
+
+        virtual void Detaching() override
+        {
+            ReleaseReader();
+            otherEcho.Reset();
+        }
+
+    private:
+        services::EchoOnSesame& otherEcho;
+    };
+
     struct EchoServer
     {
         EchoServer(services::ConnectionFactory& connectionFactory, UartCreator& serialCreator, uint16_t port);
@@ -19,7 +38,7 @@ namespace main_
             services::MethodSerializerFactory::ForServices<>::AndProxies<> serializerFactory;
             hal::BufferedSerialCommunicationOnUnbuffered::WithStorage<256> bufferedSerial{ *serial };
             main_::EchoOnSesame::WithMessageSize<256> echoUart{ bufferedSerial, serializerFactory };
-            services::EchoOnConnection echoConnection{ serializerFactory };
+            EchoOnConnection echoConnection{ echoUart.echo, serializerFactory };
 
             services::ServiceForwarderAll forwardLeft{ echoUart.echo, echoConnection };
             services::ServiceForwarderAll forwardRight{ echoConnection, echoUart.echo };
