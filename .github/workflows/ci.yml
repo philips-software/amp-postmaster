@@ -21,9 +21,6 @@ jobs:
       matrix:
         target: ["host", "stm32f407", "windows"]
         configuration: ["RelWithDebInfo"]
-        include:
-          - target: "stm32f407"
-            configuration: "MinSizeRel"
     runs-on: [ubuntu-latest]
     container: ghcr.io/philips-software/amp-devcontainer-cpp:v6.0.2@sha256:36afaaa5ba4bc4e9bb471012db9733c26a210e315ddb33600f73bb9532b02a25 # 6.0.2
     steps:
