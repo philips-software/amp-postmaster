@@ -6,6 +6,8 @@ updates:
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         update-types:
@@ -15,10 +17,14 @@ updates:
     directory: .devcontainer
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
   - package-ecosystem: gitsubmodule
     directory: /
     schedule:
       interval: daily
+    cooldown:
+      default-days: 7
     commit-message:
       prefix: "feat(deps)"
     groups:
