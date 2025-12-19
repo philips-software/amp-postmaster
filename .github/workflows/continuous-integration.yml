@@ -1,0 +1,26 @@
+---
+name: Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        target: ["host", "stm32f407", "windows"]
+        configuration: ["RelWithDebInfo"]
+    uses: ./.github/workflows/wc-continuous-integration.yml
+    with:
+      target: ${{ matrix.target }}
+      configuration: ${{ matrix.configuration }}
