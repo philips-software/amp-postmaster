@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Enabled warnings as error, requires CMake 3.24
 
+## [0.3.1](https://github.com/philips-software/amp-postmaster/compare/v0.3.0...v0.3.1) (2025-12-19)
+
+
+### Bug Fixes
+
+* Remove provenance and devcontainer templates ([#144](https://github.com/philips-software/amp-postmaster/issues/144)) ([d9b699c](https://github.com/philips-software/amp-postmaster/commit/d9b699c77f3d389f975c6d5e6fca4d7e41745df3))
+
 ## [0.3.0](https://github.com/philips-software/amp-postmaster/compare/v0.2.0...v0.3.0) (2025-12-19)
 
 
