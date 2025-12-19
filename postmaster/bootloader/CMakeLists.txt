@@ -2,6 +2,7 @@ add_executable(postmaster.bootloader)
 
 # The bootloader does not fit in its flash section when building the Debug configuration.
 emil_build_for(postmaster.bootloader TARGET_MCU_VENDOR st PREREQUISITE_CONFIG Release RelWithDebInfo MinSizeRel)
+emil_install(postmaster.bootloader EXPORT postmasterPostmasterTargets DESTINATION bin)
 
 target_sources(postmaster.bootloader PRIVATE
     Main.cpp
