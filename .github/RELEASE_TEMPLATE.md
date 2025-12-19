@@ -8,7 +8,7 @@
 
 #### :bookmark: Packages
 
-| Container            | Full identifier                                                                                                 |
-|----------------------|-----------------------------------------------------------------------------------------------------------------|
-| amp-postmaster-flex  | ghcr.io/philips-software/amp-postmaster-flex:{{ amp-postmaster-flex-version }}@{{ amp-postmaster-flex-sha }}    |
+| Container           | Full identifier                                                                                              |
+|---------------------|--------------------------------------------------------------------------------------------------------------|
+| amp-postmaster-flex | ghcr.io/philips-software/amp-postmaster-flex:{{ amp-postmaster-flex-version }}@{{ amp-postmaster-flex-sha }} |
 
