@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(Postmaster VERSION 0.2.0) # x-release-please-version
+project(Postmaster VERSION 0.3.0) # x-release-please-version
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED true)

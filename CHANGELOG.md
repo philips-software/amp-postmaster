@@ -8,6 +8,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Enabled warnings as error, requires CMake 3.24
 
+## [0.3.0](https://github.com/philips-software/amp-postmaster/compare/v0.2.0...v0.3.0) (2025-12-19)
+
+
+### Features
+
+* **deps:** Bump the git-submodules group across 1 directory with 3 updates ([#141](https://github.com/philips-software/amp-postmaster/issues/141)) ([a58cd70](https://github.com/philips-software/amp-postmaster/commit/a58cd70d755250cc557a9f6fa9cc9cd275da8494))
+
 ## [0.2.0](https://github.com/philips-software/amp-postmaster/compare/v0.1.0...v0.2.0) (2025-12-17)
 
 
