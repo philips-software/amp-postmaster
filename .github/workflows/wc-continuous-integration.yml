@@ -46,16 +46,14 @@ jobs:
           buildPreset: "${{ inputs.target }}-${{ inputs.configuration }}"
           configurePresetAdditionalArgs: "['-DCMAKE_C_COMPILER_LAUNCHER=ccache', '-DCMAKE_CXX_COMPILER_LAUNCHER=ccache']"
       - if: ${{ inputs.target == 'windows' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: WindowsDiscovery
           path: ${{ github.workspace }}/build/**/*.exe
           retention-days: 8
       - if: ${{ inputs.target == 'stm32f407' && inputs.configuration == 'RelWithDebInfo' }}
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
-          name: Postmaster
-          path: |
-            ${{ github.workspace }}/build/stm32f407/postmaster/bootloader/RelWithDebInfo/*
-            ${{ github.workspace }}/build/stm32f407/postmaster/postmaster_stm32f407/RelWithDebInfo/*
-          retention-days: 8
+          name: postmaster
+          path: build/stm32f407/Postmaster-*-Generic-ELF.tar.gz
+          if-no-files-found: error

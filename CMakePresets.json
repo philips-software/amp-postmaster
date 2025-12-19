@@ -80,7 +80,8 @@
     {
       "name": "stm32f407-RelWithDebInfo",
       "configuration": "RelWithDebInfo",
-      "configurePreset": "stm32f407"
+      "configurePreset": "stm32f407",
+      "targets": [ "all", "package" ]
     },
     {
       "name": "stm32f407-MinSizeRel",
