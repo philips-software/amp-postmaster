@@ -78,18 +78,6 @@ jobs:
           echo "digest=$(echo "$output" | jq -r '.manifest.digest // .manifests[0].digest')" >> "$GITHUB_OUTPUT"
         env:
           GH_REPO: ${{ github.repository }}
-      - name: Upload provenance to release
-        run: |
-          set -Eeuo pipefail
-          FORMATTED_DIGEST=${DIGEST//:/_}
-          gh attestation verify --repo "${GH_REPO}" "oci://${REGISTRY}/${GH_REPO}-${CONTAINER_FLAVOR}@${DIGEST}" --format json --jq '.[] | .attestation.bundle.dsseEnvelope | select(.payloadType == "application/vnd.in-toto+json").payload' | base64 -d | jq . > "${REPOSITORY_OWNER}-${REPOSITORY_NAME}-${CONTAINER_FLAVOR}_${FORMATTED_DIGEST}.intoto.jsonl"
-          gh release upload "${REF_NAME}" ./*.intoto.jsonl
-        env:
-          DIGEST: ${{ steps.inspect-manifest.outputs.digest }}
-          GH_REPO: ${{ github.repository }}
-          GH_TOKEN: ${{ github.token }}
-          REPOSITORY_OWNER: ${{ github.repository_owner }}
-          REPOSITORY_NAME: ${{ github.event.repository.name }}
       - name: Update package details in release
         run: |
           set -Eeuo pipefail
@@ -101,30 +89,6 @@ jobs:
           DIGEST: ${{ steps.inspect-manifest.outputs.digest }}
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}
-
-  publish-devcontainer-templates:
-    name: 📝 Publish templates
-    runs-on: ubuntu-latest
-    permissions:
-      packages: write # is needed by devcontainers/action to write templates as OCI artifacts
-    steps:
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
-        with:
-          disable-sudo: true
-          egress-policy: audit
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          persist-credentials: false
-      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
-      - uses: devcontainers/action@1082abd5d2bf3a11abccba70eef98df068277772 # v1.4.3
-        with:
-          disable-repo-tagging: true
-          publish-templates: true
-          base-path-to-templates: .devcontainer
 
   upload-binaries:
     name: 📄 Upload Binaries
