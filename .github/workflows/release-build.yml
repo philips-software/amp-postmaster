@@ -1,0 +1,166 @@
+---
+name: Release Build
+
+on:
+  release:
+    types: [published]
+
+concurrency:
+  group: ${{ github.ref }}-${{ github.workflow }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        target: ["host", "stm32f407", "windows"]
+        configuration: ["RelWithDebInfo"]
+    uses: ./.github/workflows/wc-continuous-integration.yml
+    with:
+      target: ${{ matrix.target }}
+      configuration: ${{ matrix.configuration }}
+
+  apply-release-notes-template:
+    name: 📝 Apply Release Template
+    runs-on: ubuntu-latest
+    permissions:
+      # Please note that this is an overly broad scope, but GitHub does not
+      # currently provide a more fine-grained permission for release modification.
+      contents: write # is needed to modify a release
+    steps:
+      - uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+        with:
+          disable-sudo-and-containers: true
+          egress-policy: audit
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - name: Amend release description
+        run: |
+          set -Eeuo pipefail
+          CURRENT_NOTES=$(gh release view "${REF_NAME}" --json body -q '.body')
+          HEADER=$(echo "$CURRENT_NOTES" | awk '/^## / {print; exit}')
+          TEMPLATE=$(cat "$GITHUB_WORKSPACE/.github/RELEASE_TEMPLATE.md")
+          BODY=$(echo "$CURRENT_NOTES" | sed "0,/^## /d")
+          gh release edit "${REF_NAME}" --notes "${HEADER}${TEMPLATE}${BODY}"
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REF_NAME: ${{ github.ref_name }}
+
+  update-release-notes:
+    name: Update Release Notes (🍨 ${{ matrix.flavor }})
+    strategy:
+      matrix:
+        flavor: [flex]
+    runs-on: ubuntu-latest
+    permissions:
+      # Please note that this is an overly broad scope, but GitHub does not
+      # currently provide a more fine-grained permission for release modification.
+      contents: write # is needed to modify a release
+    needs: [build, apply-release-notes-template]
+    env:
+      CONTAINER_FLAVOR: ${{ matrix.flavor }}
+      REF_NAME: ${{ github.ref_name }}
+      REGISTRY: ghcr.io
+    steps:
+      - uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+        with:
+          disable-sudo-and-containers: true
+          egress-policy: audit
+      - name: Inspect manifest and extract digest
+        id: inspect-manifest
+        run: |
+          set -Eeuo pipefail
+          output=$(docker buildx imagetools inspect "${REGISTRY}/${GH_REPO}-${CONTAINER_FLAVOR}:${REF_NAME}" --format '{{json .}}')
+          echo "digest=$(echo "$output" | jq -r '.manifest.digest // .manifests[0].digest')" >> "$GITHUB_OUTPUT"
+        env:
+          GH_REPO: ${{ github.repository }}
+      - name: Upload provenance to release
+        run: |
+          set -Eeuo pipefail
+          FORMATTED_DIGEST=${DIGEST//:/_}
+          gh attestation verify --repo "${GH_REPO}" "oci://${REGISTRY}/${GH_REPO}-${CONTAINER_FLAVOR}@${DIGEST}" --format json --jq '.[] | .attestation.bundle.dsseEnvelope | select(.payloadType == "application/vnd.in-toto+json").payload' | base64 -d | jq . > "${REPOSITORY_OWNER}-${REPOSITORY_NAME}-${CONTAINER_FLAVOR}_${FORMATTED_DIGEST}.intoto.jsonl"
+          gh release upload "${REF_NAME}" ./*.intoto.jsonl
+        env:
+          DIGEST: ${{ steps.inspect-manifest.outputs.digest }}
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY_OWNER: ${{ github.repository_owner }}
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
+      - name: Update package details in release
+        run: |
+          set -Eeuo pipefail
+          UPDATED_NOTES=$(gh release view "${REF_NAME}" --json body -q '.body')
+          UPDATED_NOTES=${UPDATED_NOTES//"{{ amp-postmaster-${CONTAINER_FLAVOR}-version }}"/"${REF_NAME}"}
+          UPDATED_NOTES=${UPDATED_NOTES//"{{ amp-postmaster-${CONTAINER_FLAVOR}-sha }}"/"${DIGEST}"}
+          gh release edit "${REF_NAME}" --notes "${UPDATED_NOTES}"
+        env:
+          DIGEST: ${{ steps.inspect-manifest.outputs.digest }}
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+
+  publish-devcontainer-templates:
+    name: 📝 Publish templates
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write # is needed by devcontainers/action to write templates as OCI artifacts
+    steps:
+      - uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+        with:
+          disable-sudo: true
+          egress-policy: audit
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+      - uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3.6.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+      - uses: devcontainers/action@1082abd5d2bf3a11abccba70eef98df068277772 # v1.4.3
+        with:
+          disable-repo-tagging: true
+          publish-templates: true
+          base-path-to-templates: .devcontainer
+
+  upload-binaries:
+    name: 📄 Upload Binaries
+    runs-on: ubuntu-latest
+    permissions:
+      # Please note that this is an overly broad scope, but GitHub does not
+      # currently provide a more fine-grained permission for release modification.
+      contents: write # is needed to modify a release
+    needs: [build]
+    steps:
+      - uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+        with:
+          disable-sudo: true
+          egress-policy: audit
+      - uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
+        with:
+          name: postmaster
+      - name: Upload binaries to release
+        run: |
+          set -Eeuo pipefail
+          gh release upload "${REF_NAME}" ./Postmaster-*-Generic-ELF.tar.gz
+        env:
+          GH_REPO: ${{ github.repository }}
+          GH_TOKEN: ${{ github.token }}
+          REF_NAME: ${{ github.ref_name }}
+
+  comment-released-prs:
+    name: Comment on released PRs
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write # is needed by rdlf0/comment-released-prs-action to post comments on PRs
+    steps:
+      - uses: step-security/harden-runner@95d9a5deda9de15063e7595e9719c11c38c90ae2 # v2.13.2
+        with:
+          disable-sudo-and-containers: true
+          egress-policy: audit
+      - uses: rdlf0/comment-released-prs-action@a81897eaea04a5faa8779d28607826ddb033321a # v3.1.0
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
