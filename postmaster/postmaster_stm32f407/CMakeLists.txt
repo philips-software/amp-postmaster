@@ -1,5 +1,6 @@
 add_executable(postmaster.postmaster_stm32f407)
 emil_build_for(postmaster.postmaster_stm32f407 TARGET_MCU stm32f407 PREREQUISITE_CONFIG Release RelWithDebInfo MinSizeRel)
+emil_install(postmaster.postmaster_stm32f407 EXPORT postmasterPostmasterTargets DESTINATION bin)
 
 target_include_directories(postmaster.postmaster_stm32f407 PUBLIC
     "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/../..>"
