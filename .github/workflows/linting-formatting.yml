@@ -32,7 +32,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - uses: zizmorcore/zizmor-action@e639db99335bc9038abc0e066dfcd72e23d26fb4 # v0.3.0
-      - uses: oxsecurity/megalinter/flavors/documentation@e08c2b05e3dbc40af4c23f41172ef1e068a7d651 # v8.8.0
+      - uses: oxsecurity/megalinter/flavors/documentation@55a59b24a441e0e1943080d4a512d827710d4a9d # v9.2.0
         env:
           APPLY_FIXES: all
           VALIDATE_ALL_CODEBASE: true
