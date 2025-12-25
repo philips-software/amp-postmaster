@@ -4,6 +4,16 @@ add_executable(postmaster.bootloader)
 emil_build_for(postmaster.bootloader TARGET_MCU_VENDOR st PREREQUISITE_CONFIG Release RelWithDebInfo MinSizeRel)
 emil_install(postmaster.bootloader EXPORT postmasterPostmasterTargets DESTINATION bin)
 
+get_target_property(exclude postmaster.bootloader EXCLUDE_FROM_ALL)
+if (NOT ${exclude})
+    install(
+        FILES
+        $<TARGET_FILE_DIR:postmaster.bootloader>/$<TARGET_FILE_BASE_NAME:postmaster.bootloader>.map
+        $<TARGET_FILE_DIR:postmaster.bootloader>/$<TARGET_FILE_BASE_NAME:postmaster.bootloader>.hex
+        TYPE BIN
+    )
+endif()
+
 target_sources(postmaster.bootloader PRIVATE
     Main.cpp
 )
