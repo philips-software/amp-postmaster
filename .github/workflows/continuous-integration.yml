@@ -24,3 +24,26 @@ jobs:
     with:
       target: ${{ matrix.target }}
       configuration: ${{ matrix.configuration }}
+
+  upgrade-pack:
+    name: Build Upgrade Pack
+    runs-on: [ubuntu-latest]
+    container: ghcr.io/philips-software/amp-devcontainer-cpp:v6.0.2@sha256:36afaaa5ba4bc4e9bb471012db9733c26a210e315ddb33600f73bb9532b02a25 # 6.0.2
+    needs: Build
+    steps:
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: HostInstall
+      - run: tar -zxvf Postmaster-*-Linux.tar.gz
+      - run: mkdir install
+      - run: mv Postmaster-*-Linux/* install/
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: postmaster
+      - run: tar -zxvf Postmaster-*-Generic-ELF.tar.gz
+      - run: cp -r Postmaster-*-Generic-ELF/* install/
+      - run: install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex --output=Postmaster-0.3.1.upg # x-release-please-version
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: UpgradePack
+          path: Postmaster-0.3.1.upg # x-release-please-version

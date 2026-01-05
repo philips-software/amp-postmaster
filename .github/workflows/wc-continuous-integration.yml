@@ -45,6 +45,11 @@ jobs:
           configurePreset: "${{ inputs.target }}"
           buildPreset: "${{ inputs.target }}-${{ inputs.configuration }}"
           configurePresetAdditionalArgs: "['-DCMAKE_C_COMPILER_LAUNCHER=ccache', '-DCMAKE_CXX_COMPILER_LAUNCHER=ccache']"
+      - if: ${{ inputs.target == 'host' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: HostInstall
+          path: ${{ github.workspace }}/build/host/Postmaster-*-Linux.tar.gz
       - if: ${{ inputs.target == 'windows' }}
         uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
