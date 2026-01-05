@@ -106,10 +106,14 @@ jobs:
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: postmaster
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: UpgradePack
       - name: Upload binaries to release
         run: |
           set -Eeuo pipefail
           gh release upload "${REF_NAME}" ./Postmaster-*-Generic-ELF.tar.gz
+          gh release upload "${REF_NAME}" ./Postmaster-*.upg
         env:
           GH_REPO: ${{ github.repository }}
           GH_TOKEN: ${{ github.token }}

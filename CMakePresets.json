@@ -75,7 +75,8 @@
     {
       "name": "host-RelWithDebInfo",
       "configuration": "RelWithDebInfo",
-      "configurePreset": "host"
+      "configurePreset": "host",
+      "targets": ["all", "package"]
     },
     {
       "name": "stm32f407-RelWithDebInfo",
