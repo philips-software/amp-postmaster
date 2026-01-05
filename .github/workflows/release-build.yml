@@ -23,6 +23,11 @@ jobs:
       target: ${{ matrix.target }}
       configuration: ${{ matrix.configuration }}
 
+  upgrade-pack:
+    name: Build Upgrade Pack
+    needs: [build]
+    uses: ./.github/workflows/wc-upgrade-pack.yml
+
   apply-release-notes-template:
     name: 📝 Apply Release Template
     runs-on: ubuntu-latest
