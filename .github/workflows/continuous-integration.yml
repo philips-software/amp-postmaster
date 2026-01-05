@@ -35,12 +35,13 @@ jobs:
         with:
           name: HostInstall
       - run: tar -zxvf Postmaster-*-Linux.tar.gz
-      - run: mkdir install && mv Postmaster-*-Linux/* install/
+      - run: mkdir install
+      - run: mv Postmaster-*-Linux/* install/
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: postmaster
       - run: tar -zxvf Postmaster-*-Generic-ELF.tar.gz
-      - run: mkdir install && mv Postmaster-*-Generic-ELF/* install/
+      - run: mv Postmaster-*-Generic-ELF/* install/
       - run: install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex --output=Postmaster-0.3.1.upg # x-release-please-version
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
