@@ -30,4 +30,4 @@ jobs:
     needs: Build
     uses: ./.github/workflows/wc-upgrade-pack.yml
     with:
-      version: ${{ REF_NAME }}
+      version: ${{ github.ref_name }}
