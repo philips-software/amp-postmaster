@@ -3,11 +3,13 @@ name: Continuous Integration
 
 on:
   workflow_call:
+   inputs:
+      version:
+        description: "Version"
+        required: true
+        type: string
 
 permissions: {}
-
-env:
-  VERSION: "0.4.1" # x-release-please-version
 
 jobs:
   upgrade-pack:
@@ -18,16 +20,16 @@ jobs:
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: HostInstall
-      - run: tar -zxvf Postmaster-${{ env.VERSION }}-Linux.tar.gz
+      - run: tar -zxvf Postmaster-*-Linux.tar.gz
       - run: mkdir install
-      - run: mv Postmaster-${{ env.VERSION }}-Linux/* install/
+      - run: mv Postmaster-*-Linux/* install/
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: postmaster
-      - run: tar -zxvf Postmaster-${{ env.VERSION }}-Generic-ELF.tar.gz
-      - run: cp -r Postmaster-${{ env.VERSION }}-Generic-ELF/* install/
-      - run: install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex --output=Postmaster-${{ env.VERSION }}.upg
+      - run: tar -zxvf Postmaster-*-Generic-ELF.tar.gz
+      - run: cp -r Postmaster-*-Generic-ELF/* install/
+      - run: install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex --output=Postmaster-${{ inputs.version }}.upg
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: UpgradePack
-          path: Postmaster-${{ env.VERSION }}.upg
+          path: Postmaster-${{ inputs.version }}.upg
