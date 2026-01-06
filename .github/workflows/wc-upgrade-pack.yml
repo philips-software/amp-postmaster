@@ -20,18 +20,16 @@ jobs:
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: HostInstall
-      - uses: ihiroky/extract-action@2bdc0b8926237c3829211a3e21ad129ce2769d05 # v1
-        with:
-          file_path: Postmaster-*-Linux.tar.gz
+      - id: convert-version
+        run: echo ${{ inputs.version }} | sed -e 's/v/version=/' >> $GITHUB_OUTPUT
+      - run: tar -zxvf Postmaster-${{ steps.convert-version.outputs.version }}-Linux.tar.gz
       - run: mkdir install
-      - run: mv Postmaster-*-Linux/* install/
+      - run: mv Postmaster-${{ steps.convert-version.outputs.version }}-Linux/* install/
       - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
         with:
           name: postmaster
-      - uses: ihiroky/extract-action@2bdc0b8926237c3829211a3e21ad129ce2769d05 # v1
-        with:
-          file_path: Postmaster-*-Generic-ELF.tar.gz
-      - run: cp -r Postmaster-*-Generic-ELF/* install/
+      - run: tar -zxvf Postmaster-${{ steps.convert-version.outputs.version }}-Generic-ELF.tar.gz
+      - run: cp -r Postmaster-${{ steps.convert-version.outputs.version }}-Generic-ELF/* install/
       - run: install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex --output=Postmaster-${{ inputs.version }}.upg
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
