@@ -3,7 +3,7 @@
 
 int main(int argc, const char* argv[])
 {
-    application::UpgradePackBuilder::HeaderInfo header{ "Postmaster", "v0.3.1", "", 0 }; // x-release-please-version
+    application::UpgradePackBuilder::HeaderInfo header{ "Postmaster", Postmaster::generated::VERSION, "", 0 };
     application::SupportedTargets supportedTargets = application::SupportedTargets::Create()
                                                          .Mandatory()
                                                          .AddHex("app");
