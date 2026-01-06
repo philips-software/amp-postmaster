@@ -21,7 +21,7 @@ jobs:
         with:
           name: HostInstall
       - id: convert-version
-        run: echo "${{ inputs.version }}" | sed -e 's/v/version=/' -e 's/\/merge//' >> $GITHUB_OUTPUT
+        run: echo "${{ inputs.version }}" | sed -e 's/v/version=/' -e 's/\(.*\)\/merge/version=\0/' >> $GITHUB_OUTPUT
       - run: tar -zxvf Postmaster-${{ steps.convert-version.outputs.version }}-Linux.tar.gz
       - run: mkdir install
       - run: mv Postmaster-${{ steps.convert-version.outputs.version }}-Linux/* install/
