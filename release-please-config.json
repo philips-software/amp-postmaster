@@ -5,7 +5,7 @@
     ".": {
       "release-type": "simple",
       "package-name": "amp-postmaster",
-      "extra-files": ["CMakeLists.txt"]
+      "extra-files": ["CMakeLists.txt", ".github/workflows/wc-upgrade-pack.yml"]
     }
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
