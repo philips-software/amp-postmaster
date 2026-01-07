@@ -33,7 +33,7 @@ jobs:
       - id: convert-version
         run: "echo \"${VERSION}\" | sed -e 's/v/version=/' -e \"s/\\(.*\\)\\/merge/version=\\1/\" >> \"$GITHUB_OUTPUT\""
       - run: "echo \"${VERSION}\" | sed -e 's/v/version=/' -e \"s/\\(.*\\)\\/merge/version=\\1/\" >> \"$GITHUB_ENV\""
-      - run: "install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex \"--output=Postmaster-$version.upg\""
+      - run: 'install/bin/postmaster.upgrade_pack_builder --app=install/bin/postmaster.postmaster_stm32f407.hex "--output=Postmaster-$version.upg"'
       - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
         with:
           name: UpgradePack
