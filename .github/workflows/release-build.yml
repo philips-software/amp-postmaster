@@ -27,6 +27,8 @@ jobs:
     name: Build Upgrade Pack
     needs: [build]
     uses: ./.github/workflows/wc-upgrade-pack.yml
+    with:
+      version: ${{ github.ref_name }}
 
   apply-release-notes-template:
     name: 📝 Apply Release Template
