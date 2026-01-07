@@ -21,6 +21,7 @@ namespace application
         // Implementation of HttpResponse
         virtual infra::BoundedConstString Status() const override;
         virtual void WriteBody(infra::TextOutputStream& stream) const override;
+        infra::BoundedConstString ContentType() const override;
 
     private:
         infra::BoundedConstString path;

@@ -63,4 +63,9 @@ namespace application
         configuration.Add("version", Postmaster::generated::VERSION);
         configuration.Add("version_full", Postmaster::generated::VERSION_FULL);
     }
+
+    infra::BoundedConstString HttpPageConfiguration::ContentType() const
+    {
+        return "application/json";
+    }
 }
