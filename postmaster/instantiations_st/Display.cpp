@@ -2,8 +2,8 @@
 
 namespace main_
 {
-    Display::Display(const postmaster_configuration::Configuration& configuration)
-        : viewStatus{ std::chrono::milliseconds(25), 1, std::chrono::seconds(2), configuration.hostname }
+    Display::Display(const postmaster_configuration::Configuration& configuration, services::ConfigurationStoreInterface& configurationStore)
+        : viewStatus{ std::chrono::milliseconds(25), 1, std::chrono::seconds(2), configuration.hostname, configurationStore }
         , networkQrCode{ configuration.password }
     {
         displayView.SetViewRegion(display.DisplayRegion());

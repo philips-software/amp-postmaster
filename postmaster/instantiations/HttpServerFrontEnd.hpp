@@ -4,9 +4,9 @@
 #include "generated/page_contents/IndexHtml.hpp"
 #include "generated/page_contents/StyleCss.hpp"
 #include "generated/page_contents/UploadJs.hpp"
+#include "postmaster/application/HttpPageConfiguration.hpp"
 #include "postmaster/frontend/AuthenticatedHttpPage.hpp"
 #include "postmaster/frontend/ReportingHttpServer.hpp"
-#include "postmaster/instantiations/HttpPageConfiguration.hpp"
 #include "services/network/HttpServer.hpp"
 #include "services/util/ConfigurationStore.hpp"
 

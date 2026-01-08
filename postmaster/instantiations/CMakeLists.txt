@@ -14,18 +14,12 @@ target_sources(postmaster.instantiations PRIVATE
     Configuration.hpp
     EchoServer.cpp
     EchoServer.hpp
-    HttpPageConfiguration.cpp
-    HttpPageConfiguration.hpp
-    HttpPageDiscovery.cpp
-    HttpPageDiscovery.hpp
     HttpServer.cpp
     HttpServer.hpp
     HttpServerFrontEnd.cpp
     HttpServerFrontEnd.hpp
     Mdns.cpp
     Mdns.hpp
-    MdnsDiscovery.cpp
-    MdnsDiscovery.hpp
     SelfProgrammer.hpp
     TargetProgrammer.hpp
     TargetUart.cpp
@@ -33,19 +27,10 @@ target_sources(postmaster.instantiations PRIVATE
     TargetUartEcho.cpp
     TargetUartEcho.hpp
     UartCreator.hpp
-    ViewNetworkStatus.cpp
-    ViewNetworkStatus.hpp
-    ViewStatus.cpp
-    ViewStatus.hpp
 )
 
-add_version_header_dependency(postmaster.instantiations postmaster.version)
-
 target_link_libraries(postmaster.instantiations PUBLIC
-    infra.syntax
+    postmaster.application
     postmaster.programmer
     postmaster.frontend
-    preview.views
-    preview.fonts
-    lwip.lwip_cpp
 )

@@ -1,7 +1,7 @@
 #ifndef POSTMASTER_HTTP_PAGE_DISCOVERY_HPP
 #define POSTMASTER_HTTP_PAGE_DISCOVERY_HPP
 
-#include "postmaster/instantiations/MdnsDiscovery.hpp"
+#include "postmaster/application/MdnsDiscovery.hpp"
 #include "services/network/HttpServer.hpp"
 
 namespace application

@@ -4,8 +4,8 @@
 #include "hal_st/stm32fxxx/ResetStm.hpp"
 #include "hal_st/synchronous_stm32fxxx/SynchronousRandomDataGeneratorStm.hpp"
 #include "hal_st_lwip/instantiations_lwip/Ethernet.hpp"
+#include "postmaster/application/ViewStatus.hpp"
 #include "postmaster/instantiations/Configuration.hpp"
-#include "postmaster/instantiations/ViewStatus.hpp"
 #include "postmaster/instantiations_st/NetworkConnected.hpp"
 
 namespace main_

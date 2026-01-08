@@ -1,4 +1,4 @@
-#include "postmaster/instantiations/MdnsDiscovery.hpp"
+#include "postmaster/application/MdnsDiscovery.hpp"
 #include "infra/stream/ByteInputStream.hpp"
 
 namespace application

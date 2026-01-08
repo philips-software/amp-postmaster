@@ -3,11 +3,11 @@
 
 #include "generated/Version.h"
 #include "lwip/lwip_cpp/LightweightIp.hpp"
+#include "postmaster/application/MdnsDiscovery.hpp"
+#include "postmaster/application/ViewNetworkStatus.hpp"
+#include "postmaster/application/ViewStatus.hpp"
 #include "postmaster/instantiations/EchoServer.hpp"
 #include "postmaster/instantiations/Mdns.hpp"
-#include "postmaster/instantiations/MdnsDiscovery.hpp"
-#include "postmaster/instantiations/ViewNetworkStatus.hpp"
-#include "postmaster/instantiations/ViewStatus.hpp"
 #include "postmaster/instantiations_st/HttpServerSt.hpp"
 
 namespace main_
