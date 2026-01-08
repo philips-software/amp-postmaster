@@ -19,7 +19,7 @@ namespace main_
 {
     struct Display
     {
-        Display(const postmaster_configuration::Configuration& configuration);
+        Display(const postmaster_configuration::Configuration& configuration, services::ConfigurationStoreInterface& configurationStore);
 
         hal::GpioPinStm scl{ hal::Port::B, 8, hal::Drive::OpenDrain };
         hal::GpioPinStm sda{ hal::Port::B, 9, hal::Drive::OpenDrain };

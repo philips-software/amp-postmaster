@@ -3,7 +3,7 @@
 
 namespace application
 {
-    ViewStatus::ViewStatus(infra::BoundedConstString hostname)
+    ViewStatus::ViewStatus(const infra::BoundedString& hostname, services::ConfigurationStoreInterface& configurationStore)
         : services::ViewText(services::TextAttributes{ infra::Colour::white, infra::freeSans9pt7b })
         , hostname(hostname)
     {
@@ -29,6 +29,11 @@ namespace application
     {
         receivingSelf = receiving;
 
+        Update();
+    }
+
+    void ViewStatus::OperationDone(uint32_t id)
+    {
         Update();
     }
 

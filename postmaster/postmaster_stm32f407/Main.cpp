@@ -103,7 +103,7 @@ int main()
         flash.configurationStore[0], flash.configurationStore[1], hal::UniqueDeviceId(), []()
         {
             static main_::TargetUarts targetUarts(dma);
-            static main_::Display display(configuration.store.Configuration());
+            static main_::Display display(configuration.store.Configuration(), configuration.store);
             static main_::EthernetPostmaster ethernet(ethernetPins, configuration, flash.upgradePack, targetUarts.uartProgrammerCreator, targetUarts.uartExternalCreator, display.viewStatus.SubView());
         },
         tracer.tracer);
