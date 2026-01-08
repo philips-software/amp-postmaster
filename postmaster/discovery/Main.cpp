@@ -3,7 +3,7 @@
 #include "hal/generic/TimerServiceGeneric.hpp"
 #include "infra/stream/StdStringOutputStream.hpp"
 #include "infra/syntax/JsonFormatter.hpp"
-#include "postmaster/instantiations/MdnsDiscovery.hpp"
+#include "postmaster/application/MdnsDiscovery.hpp"
 #include "services/network/Http.hpp"
 #include "services/network/HttpErrors.hpp"
 #include "services/network/HttpServer.hpp"

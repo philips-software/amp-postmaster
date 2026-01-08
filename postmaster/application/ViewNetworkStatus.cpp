@@ -1,4 +1,4 @@
-#include "postmaster/instantiations/ViewNetworkStatus.hpp"
+#include "postmaster/application/ViewNetworkStatus.hpp"
 #include "infra/stream/StringOutputStream.hpp"
 #include "lwip/netif.h"
 

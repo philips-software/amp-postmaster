@@ -1,4 +1,4 @@
-#include "postmaster/instantiations/HttpPageDiscovery.hpp"
+#include "postmaster/application/HttpPageDiscovery.hpp"
 #include "infra/syntax/JsonFormatter.hpp"
 #include "services/network/Address.hpp"
 #include "services/network/HttpErrors.hpp"

@@ -1,4 +1,4 @@
-#include "postmaster/instantiations/ViewStatus.hpp"
+#include "postmaster/application/ViewStatus.hpp"
 #include "infra/stream/StringOutputStream.hpp"
 
 namespace application

@@ -1,4 +1,4 @@
-#include "postmaster/instantiations/HttpPageConfiguration.hpp"
+#include "postmaster/application/HttpPageConfiguration.hpp"
 #include "generated/Version.h"
 #include "infra/syntax/JsonFormatter.hpp"
 #include "services/network/HttpErrors.hpp"

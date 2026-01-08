@@ -1,7 +1,7 @@
 #ifndef POSTMASTER_HTTP_SERVER_HPP
 #define POSTMASTER_HTTP_SERVER_HPP
 
-#include "postmaster/instantiations/HttpPageDiscovery.hpp"
+#include "postmaster/application/HttpPageDiscovery.hpp"
 #include "postmaster/instantiations/HttpServerFrontEnd.hpp"
 #include "postmaster/instantiations/SelfProgrammer.hpp"
 #include "postmaster/instantiations/TargetProgrammer.hpp"
