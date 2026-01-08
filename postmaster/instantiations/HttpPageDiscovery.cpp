@@ -42,4 +42,9 @@ namespace application
                 device.Add("attributes", postmaster.attributes);
             });
     }
+
+    infra::BoundedConstString HttpPageDiscovery::ContentType() const
+    {
+        return "application/json";
+    }
 }
