@@ -3,8 +3,8 @@
 
 #include "generated/echo/PostmasterConfiguration.pb.hpp"
 #include "hal_st/stm32fxxx/I2cStm.hpp"
-#include "postmaster/instantiations/ViewNetworkStatus.hpp"
-#include "postmaster/instantiations/ViewStatus.hpp"
+#include "postmaster/application/ViewNetworkStatus.hpp"
+#include "postmaster/application/ViewStatus.hpp"
 #include "preview/interfaces/BitmapPainter.hpp"
 #include "preview/interfaces/BufferedDisplaySsd1306.hpp"
 #include "preview/interfaces/ViewPainterBufferedDisplay.hpp"
