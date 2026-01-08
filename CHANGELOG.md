@@ -8,6 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 
 - Enabled warnings as error, requires CMake 3.24
 
+## [0.5.0](https://github.com/philips-software/amp-postmaster/compare/v0.4.2...v0.5.0) (2026-01-08)
+
+
+### Features
+
+* **deps:** Bump the git-submodules group with 3 updates ([#157](https://github.com/philips-software/amp-postmaster/issues/157)) ([c72f827](https://github.com/philips-software/amp-postmaster/commit/c72f82746b9ce9e1db89811cab0ec1cbe0d8ef59))
+
+
+### Bug Fixes
+
+* Fill out content type and content length ([#165](https://github.com/philips-software/amp-postmaster/issues/165)) ([e9c7b0c](https://github.com/philips-software/amp-postmaster/commit/e9c7b0c233c8393ec904399f9182b687d82dedd9))
+* Firmware upgrade ([#167](https://github.com/philips-software/amp-postmaster/issues/167)) ([95f315a](https://github.com/philips-software/amp-postmaster/commit/95f315a3d97898ae5ea2628a7af4c72bc2e6cbd3))
+* Update display when hostname changes ([#168](https://github.com/philips-software/amp-postmaster/issues/168)) ([a214a2b](https://github.com/philips-software/amp-postmaster/commit/a214a2b18682dc2801df2f195e07964dcda485f7))
+
 ## [0.4.2](https://github.com/philips-software/amp-postmaster/compare/v0.4.1...v0.4.2) (2026-01-07)
 
 
