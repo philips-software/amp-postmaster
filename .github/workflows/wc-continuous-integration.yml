@@ -38,7 +38,7 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - run: git -C ${{ github.workspace }} rev-parse --short @{0}
+      - run: "git -C ${{ github.workspace }} rev-parse --short @{0}"
       - uses: hendrikmuhs/ccache-action@5ebbd400eff9e74630f759d94ddd7b6c26299639 # v1.2.20
         with:
           key: ${{ inputs.target}}-${{ inputs.configuration }}
