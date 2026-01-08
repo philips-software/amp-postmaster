@@ -1,11 +1,13 @@
 #include "generated/stm32fxxx/PinoutTableDefault.hpp"
 #include "hal_st/cortex/InterruptCortex.hpp"
+#include "hal_st/instantiations/NucleoTracerInfrastructure.hpp"
 #include "hal_st/stm32fxxx/GpioStm.hpp"
 #include "hal_st/synchronous_stm32fxxx/SynchronousFlashInternalStm.hpp"
 #include "hal_st/synchronous_stm32fxxx/SynchronousSpiMasterStm.hpp"
 #include "services/synchronous_util/SynchronousFlashRegion.hpp"
 #include "services/synchronous_util/SynchronousFlashSpi.hpp"
 #include "services/synchronous_util/SynchronousSpiMasterWithChipSelect.hpp"
+#include "services/tracer/GlobalTracer.hpp"
 #include "upgrade/boot_loader/DecryptorNone.hpp"
 #include "upgrade/boot_loader/ImageUpgraderFlash.hpp"
 #include "upgrade/boot_loader/PackUpgrader.hpp"
@@ -31,13 +33,10 @@ constexpr services::SynchronousFlashSpiConfig CreateFlashConfig()
 
 void ProcessUpgradePack(infra::ConstByteRange flashMemory, uint32_t flashOffset)
 {
-    static hal::InterruptTable::WithStorage<128> interruptTable;
-    static hal::GpioStm gpio(hal::pinoutTableDefaultStm, hal::analogTableDefaultStm);
-
     static std::array<uint32_t, 12> sectorSizes{
-        0x08000, 0x08000, 0x08000, 0x08000,
-        0x20000, 0x40000, 0x40000, 0x40000,
-        0x40000, 0x40000, 0x40000, 0x40000
+        0x04000, 0x04000, 0x04000, 0x04000,
+        0x10000, 0x20000, 0x20000, 0x20000,
+        0x20000, 0x20000, 0x20000, 0x20000
     };
 
     hal::SynchronousFlashInternalStm internalFlash(infra::MakeRange(sectorSizes), flashMemory);
@@ -93,6 +92,16 @@ unsigned int hse_value = 8000000;
 int main()
 {
     HAL_Init();
+
+    static hal::InterruptTable::WithStorage<128> interruptTable;
+    static hal::GpioStm gpio(hal::pinoutTableDefaultStm, hal::analogTableDefaultStm);
+
+    static hal::GpioPinStm traceUartTx{ hal::Port::D, 8 };
+    static hal::SynchronousUartStmSendOnly traceUart{ 3, traceUartTx };
+    static services::StreamWriterOnSynchronousSerialCommunication traceWriter{ traceUart };
+    static infra::TextOutputStream::WithErrorPolicy tracerOutputStream{ traceWriter };
+    static services::TracerToStream tracer{ tracerOutputStream };
+    services::SetGlobalTracerInstance(tracer);
 
     extern uint8_t _flash_start;
     extern uint8_t _flash_end;

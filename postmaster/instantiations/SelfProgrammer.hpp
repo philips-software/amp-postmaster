@@ -16,6 +16,7 @@ namespace main_
             , firmwareReceptorReporting(firmwareReceptorReboot, receiving)
         {
             page.SetReceptor(firmwareReceptorReporting);
+            firmwareReceptor.FlashInitializationDone();
         }
 
         application::FirmwareReceptorToFlash firmwareReceptor;
