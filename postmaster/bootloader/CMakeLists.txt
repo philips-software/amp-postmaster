@@ -22,6 +22,7 @@ target_link_libraries(postmaster.bootloader PUBLIC
     upgrade.boot_loader
     services.util
     hal_st.synchronous_stm32fxxx
+    hal_st.instantiations
 )
 
 halst_target_linker_scripts(TARGET postmaster.bootloader LINKER_SCRIPTS
