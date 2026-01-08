@@ -5,6 +5,7 @@ namespace application
 {
     ViewStatus::ViewStatus(const infra::BoundedString& hostname, services::ConfigurationStoreInterface& configurationStore)
         : services::ViewText(services::TextAttributes{ infra::Colour::white, infra::freeSans9pt7b })
+        , services::ConfigurationStoreObserver(configurationStore)
         , hostname(hostname)
     {
         Update();
