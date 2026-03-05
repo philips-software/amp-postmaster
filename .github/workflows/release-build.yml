@@ -38,11 +38,11 @@ jobs:
       # currently provide a more fine-grained permission for release modification.
       contents: write # is needed to modify a release
     steps:
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+      - uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
         with:
           disable-sudo-and-containers: true
           egress-policy: audit
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
       - name: Amend release description
@@ -73,7 +73,7 @@ jobs:
       REF_NAME: ${{ github.ref_name }}
       REGISTRY: ghcr.io
     steps:
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+      - uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
         with:
           disable-sudo-and-containers: true
           egress-policy: audit
@@ -106,7 +106,7 @@ jobs:
       contents: write # is needed to modify a release
     needs: [build]
     steps:
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+      - uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
         with:
           disable-sudo: true
           egress-policy: audit
@@ -132,7 +132,7 @@ jobs:
     permissions:
       pull-requests: write # is needed by rdlf0/comment-released-prs-action to post comments on PRs
     steps:
-      - uses: step-security/harden-runner@20cf305ff2072d973412fa9b1e3a4f227bda3c76 # v2.14.0
+      - uses: step-security/harden-runner@a90bcbc6539c36a85cdfeb73f7e2f433735f215b # v2.15.0
         with:
           disable-sudo-and-containers: true
           egress-policy: audit
