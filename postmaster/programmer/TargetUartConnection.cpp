@@ -11,7 +11,7 @@ namespace application
     {
         serial.ReceiveData([this](infra::ConstByteRange data)
             {
-                data.shrink_from_back_to(queue.EmptySize() - queue.Size());
+                data.shrink_from_back_to(queue.Capacity() - queue.Size());
                 queue.AddFromInterrupt(data);
             });
     }
