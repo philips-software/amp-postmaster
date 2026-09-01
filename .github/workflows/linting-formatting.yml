@@ -23,7 +23,7 @@ jobs:
       pull-requests: write
       security-events: write
     steps:
-      - uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
+      - uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c # v2.21.0
         with:
           disable-sudo: true
           egress-policy: audit
@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - uses: zizmorcore/zizmor-action@71321a20a9ded102f6e9ce5718a2fcec2c4f70d8 # v0.5.2
+      - uses: zizmorcore/zizmor-action@3dc1ecc9bcb9e94e9b2c709687979e1298497054 # v0.6.2
       - uses: oxsecurity/megalinter/flavors/documentation@8fbdead70d1409964ab3d5afa885e18ee85388bb # v9.4.0
         env:
           APPLY_FIXES: all
@@ -47,7 +47,7 @@ jobs:
           name: linter
           path: |
             megalinter-reports
-      - uses: reviewdog/action-suggester@aa38384ceb608d00f84b4690cacc83a5aba307ff
+      - uses: reviewdog/action-suggester@2558ba17e65a9039e73764a73009fc05fef28a46
         with:
           tool_name: MegaLinter
           filter_mode: diff_context
