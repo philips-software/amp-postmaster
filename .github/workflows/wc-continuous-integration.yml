@@ -21,7 +21,7 @@ jobs:
     runs-on: [ubuntu-latest]
     container: ghcr.io/philips-software/amp-devcontainer-cpp:v6.0.2@sha256:36afaaa5ba4bc4e9bb471012db9733c26a210e315ddb33600f73bb9532b02a25 # 6.0.2
     steps:
-      - uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
+      - uses: step-security/harden-runner@46b06cea07f9e64621fdf066ba77ac6915163d43 # v2.22.3
         with:
           disable-sudo-and-containers: true
           egress-policy: audit
@@ -37,7 +37,7 @@ jobs:
         with:
           persist-credentials: false
           submodules: true
-      - uses: hendrikmuhs/ccache-action@33522472633dbd32578e909b315f5ee43ba878ce # v1.2.22
+      - uses: hendrikmuhs/ccache-action@f09c25b45002a07be2955cbe52e8cee55643f89d # v1.2.24
         with:
           key: ${{ inputs.target}}-${{ inputs.configuration }}
       - uses: lukka/run-cmake@5d55ea7949e25f69f0ecb516d8d572297e03a956 # v10.9
